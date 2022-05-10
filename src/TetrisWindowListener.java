@@ -22,8 +22,13 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
        } else if (e.getKeyCode() == 68) {
            // move right
            panel.getCurrentPiece().changeX(1);
+       } else if (e.getKeyCode() == 83) {
+           // move downwards, faster
+        if (inFocus) {
+            panel.getCurrentPiece().decrementY();
+        }
        }
-
+    //    System.out.println(e.getKeyCode());
        panel.repaint();
         
     }
