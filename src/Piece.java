@@ -9,17 +9,18 @@ public class Piece {
 
     private enum Direction {
         LEFT,
-        RIGHT
+        RIGHT,
+        DOWN
     }
 
     private Block[] shape;
     private Color color = Color.blue;
 
-
     // center point to base the other points off of
     private Coordinate c;
     public Piece(shapeType t, int x, int y) {
         c = new Coordinate(x, y);
+        
         switch (t) {
             case LSHAPE:
                 // System.out.println("An l shaped block has been created!");
@@ -44,16 +45,23 @@ public class Piece {
     }
 
     public void changeX(int amount) {
-        // System.out.println("Evaluating options!");
         Direction toBeMoved = amount > 0 ? Direction.RIGHT : Direction.LEFT;
         if (!withinBounds(toBeMoved)) {
             return;
         }
 
-        // System.out.println("Not near a wall!");
-        // if it does satisfy the conditions
         for (int i = 0; i < shape.length; i++) {
             shape[i].changeX(amount);
+        }
+    }
+
+    public void decrementY() {
+        if (!withinBounds(Direction.DOWN)) {
+            return;
+        }
+
+        for (int i = 0; i < shape.length; i++) {
+            shape[i].changeY(1);
         }
     }
 
@@ -71,9 +79,17 @@ public class Piece {
                 }
             }
             return true;
-        } else {
+        } else if (d == Direction.LEFT) {
             for (Block b: shape) {
                 if (b.coordinate.getX() < 1) {
+                    return false;
+                }
+            }
+
+            return true;
+        } else {
+            for (Block b: shape) {
+                if (b.coordinate.getY() > 18) {
                     return false;
                 }
             }
