@@ -4,8 +4,9 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class TetrisWindowPanel extends JPanel {
-
+    Board board = new Board();
     Piece test = new Piece(Piece.shapeType.LSHAPE, 5, 0);
+
     public TetrisWindowPanel() {
         JPanel everything = new JPanel();
         everything.setLayout(new GridLayout(20, 10));
@@ -29,6 +30,9 @@ public class TetrisWindowPanel extends JPanel {
         // test.changeX(-1);
         test.draw(g);
         // repaint();
+        for (Piece p: board.getAllPieces()) {
+            p.draw(g);
+        }
 
 
     }

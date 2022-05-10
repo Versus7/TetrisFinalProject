@@ -44,6 +44,15 @@ public class Piece {
         }
     }
 
+    public boolean containsPoint(Coordinate c) {
+        for (Block b: shape) {
+            if (b.getCoords().getX() == c.getX() && b.getCoords().getY() == c.getY()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void changeX(int amount) {
         Direction toBeMoved = amount > 0 ? Direction.RIGHT : Direction.LEFT;
         if (!withinBounds(toBeMoved)) {

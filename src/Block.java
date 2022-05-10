@@ -8,6 +8,10 @@ public class Block {
         coordinate = new Coordinate(x, y);
     }
 
+    public Coordinate getCoords() {
+        return coordinate;
+    }
+
     public void changeX(int amount) {
         coordinate.setX(coordinate.getX() + amount);
     }

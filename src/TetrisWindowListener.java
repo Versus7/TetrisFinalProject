@@ -5,6 +5,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     TetrisWindowPanel panel;
     Timer timer;
     boolean inFocus = true;
+    Board board = new Board();
 
     public TetrisWindowListener(TetrisWindowPanel panel) {
         this.panel = panel;
