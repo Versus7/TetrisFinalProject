@@ -41,8 +41,9 @@ public class Board {
 
     public void movePieceDown() {
         // TODO: Fix condition checking if piece is at the bottom of the game thing
-        System.out.println("(" + currentPiece.getLowestPoint().getX() + ", " + currentPiece.getLowestPoint().getY() + ")");
-        if (!containsPoint(new Coordinate(currentPiece.getLowestPoint().getX(), currentPiece.getLowestPoint().getY()+1)) && currentPiece.getLowestPoint().getY() < 20) {
+        // System.out.println("(" + currentPiece.getLowestPoint().getX() + ", " + currentPiece.getLowestPoint().getY() + ")");
+        if (!containsPoint(new Coordinate(currentPiece.getLowestPoint().getX(), currentPiece.getLowestPoint().getY()+1))
+         && currentPiece.getLowestPoint().getY() < 20) {
             // System.out.println("No block detected!");
             currentPiece.decrementY();
         } else {
@@ -53,7 +54,8 @@ public class Board {
 
     public void movePieceRight() {
         for (Block b: currentPiece.getShape()) {
-            if (containsPoint(new Coordinate(b.getCoords().getX() + 1, b.getCoords().getY()))) {
+            if (containsPoint(new Coordinate(b.getCoords().getX() + 1, b.getCoords().getY()))
+            || b.getCoords().getX() > 8) {
                 return;
             }
         }
@@ -63,7 +65,8 @@ public class Board {
 
     public void movePieceLeft() {
         for (Block b: currentPiece.getShape()) {
-            if (containsPoint(new Coordinate(b.getCoords().getX() - 1, b.getCoords().getY()))) {
+            if (containsPoint(new Coordinate(b.getCoords().getX() - 1, b.getCoords().getY()))
+            || b.getCoords().getX() < 1) {
                 return;
             }
         }
