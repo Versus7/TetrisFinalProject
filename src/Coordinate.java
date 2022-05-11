@@ -23,4 +23,8 @@ public class Coordinate {
     public void setY(int newY) {
         y = newY;
     }
+
+    public String toString() {
+        return "(" + getX() + ", " + getY() + ")";
+    }
 }
