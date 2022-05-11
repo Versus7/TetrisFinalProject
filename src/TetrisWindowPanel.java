@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();
+    public static int SQUAREWIDTH = 40;
 
     public TetrisWindowPanel() {
         JPanel everything = new JPanel();
@@ -16,18 +17,16 @@ public class TetrisWindowPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        SQUAREWIDTH = getHeight() / 20;
+
         // drawing out the tetris grid
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 20; j++) {
-                g.drawRect(i*Block.SQUAREWIDTH, j*Block.SQUAREWIDTH, Block.SQUAREWIDTH, Block.SQUAREWIDTH);
-                g.drawString(i + ", " + j, i*Block.SQUAREWIDTH, j*Block.SQUAREWIDTH);
+                g.drawRect(i*SQUAREWIDTH, j*SQUAREWIDTH, SQUAREWIDTH, SQUAREWIDTH);
+                // g.drawString(i + ", " + j, i*SQUAREWIDTH, j*SQUAREWIDTH);
             }
         }
 
-        // Block test = new Block(5, 5);
-        // test.draw(g);
-
-        // test.changeX(-1);
         board.getCurrentPiece().draw(g);
         // repaint();
         for (Piece p: board.getAllPieces()) {
