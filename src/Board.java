@@ -20,7 +20,7 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        currentPiece = new Piece(Piece.shapeType.LSHAPE, 7, 0);
+        currentPiece = new Piece(Piece.shapeType.LSHAPE, (int)(Math.random()*10), -3);
     }
 
     public void clearRow(int rowNum) {
@@ -41,17 +41,33 @@ public class Board {
     }
 
     public void movePieceDown() {
-        // TODO: Add condition checking if piece is at the bottom of the game thing
-        if (!containsPoint(new Coordinate(currentPiece.getLowestPoint().getX(), currentPiece.getLowestPoint().getY()+1))) {
-            System.out.println("No block detected!");
+        // TODO: Fix condition checking if piece is at the bottom of the game thing
+        System.out.println("(" + currentPiece.getLowestPoint().getX() + ", " + currentPiece.getLowestPoint().getY() + ")");
+        if (!containsPoint(new Coordinate(currentPiece.getLowestPoint().getX(), currentPiece.getLowestPoint().getY()+1)) && currentPiece.getLowestPoint().getY() < 15) {
+            // System.out.println("No block detected!");
             currentPiece.decrementY();
         } else {
-            System.out.println("Block detected below! No movement");
+            // System.out.println("Block detected below! No movement");
             generateNewPiece();
         }
     }
 
     public void movePieceRight() {
+        for (Block b: currentPiece.getShape()) {
+            if (containsPoint(new Coordinate(b.getCoords().getX() + 1, b.getCoords().getY()))) {
+                return;
+            }
+        }
 
+        currentPiece.changeX(1);
     }
-}
+
+    public void movePieceLeft() {
+        for (Block b: currentPiece.getShape()) {
+            if (containsPoint(new Coordinate(b.getCoords().getX() - 1, b.getCoords().getY()))) {
+                return;
+            }
+        }
+
+        currentPiece.changeX(-1);
+    }}

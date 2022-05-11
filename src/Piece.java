@@ -45,6 +45,10 @@ public class Piece {
         }
     }
 
+    public Block[] getShape() {
+        return shape;
+    }
+
     public boolean containsPoint(Coordinate c) {
         for (Block b: shape) {
             if (b.getCoords().getX() == c.getX() && b.getCoords().getY() == c.getY()) {
@@ -87,31 +91,31 @@ public class Piece {
         }
     }
 
-    public boolean withinBounds(Direction d) {
-        if (d == Direction.RIGHT) {
-            for (Block b: shape) {
-                if (b.coordinate.getX() > 8) {
-                    return false;
-                }
-            }
-            return true;
-        } else if (d == Direction.LEFT) {
-            for (Block b: shape) {
-                if (b.coordinate.getX() < 1) {
-                    return false;
-                }
-            }
+    // public boolean withinBounds(Direction d) {
+    //     if (d == Direction.RIGHT) {
+    //         for (Block b: shape) {
+    //             if (b.coordinate.getX() > 8) {
+    //                 return false;
+    //             }
+    //         }
+    //         return true;
+    //     } else if (d == Direction.LEFT) {
+    //         for (Block b: shape) {
+    //             if (b.coordinate.getX() < 1) {
+    //                 return false;
+    //             }
+    //         }
 
-            return true;
-        } else {
-            for (Block b: shape) {
-                if (b.coordinate.getY() > 18) {
-                    return false;
-                }
-            }
+    //         return true;
+    //     } else {
+    //         for (Block b: shape) {
+    //             if (b.coordinate.getY() > 18) {
+    //                 return false;
+    //             }
+    //         }
 
-            return true;
-        }
-    }
+    //         return true;
+    //     }
+    // }
 
 }
