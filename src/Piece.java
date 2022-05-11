@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class Piece {
     public static enum shapeType {
@@ -13,7 +14,7 @@ public class Piece {
         DOWN
     }
 
-    private Block[] shape;
+    private ArrayList<Block> shape = new ArrayList<Block>();
     private static Color[] possibleColors = new Color[] {Color.blue, Color.orange, Color.yellow, Color.green, Color.red, Color.CYAN};
     private Color color = possibleColors[(int)(Math.random()*possibleColors.length)];
 
@@ -25,27 +26,24 @@ public class Piece {
         switch (t) {
             case LSHAPE:
                 // System.out.println("An l shaped block has been created!");
-                shape = new Block[4];
-                shape[0] = new Block(c.getX(), c.getY());
-                shape[1] = new Block(c.getX(), c.getY()+1);
-                shape[2] = new Block(c.getX(), c.getY()+2);
-                shape[3] = new Block(c.getX(), c.getY()+3);
+                shape.add(new Block(c.getX(), c.getY()));
+                shape.add(new Block(c.getX(), c.getY() + 1));
+                shape.add(new Block(c.getX(), c.getY() + 2));
+                shape.add(new Block(c.getX(), c.getY() + 3));
                 break;
             case SQUARE:
                 // System.out.println("A square shaped block has been created!");
-                shape = new Block[4];
-
-                shape[0] = new Block(c.getX(), c.getY());
-                shape[1] = new Block(c.getX() + 1, c.getY());
-                shape[2] = new Block(c.getX(), c.getY()+1);
-                shape[3] = new Block(c.getX()+1, c.getY()+1);
+                shape.add(new Block(c.getX(), c.getY()));
+                shape.add(new Block(c.getX() + 1, c.getY()));
+                shape.add(new Block(c.getX(), c.getY()+1));
+                shape.add(new Block(c.getX()+1, c.getY()+1));
                 break;
             default:
                 System.out.println("Some other type has been created!");
         }
     }
 
-    public Block[] getShape() {
+    public ArrayList<Block> getShape() {
         return shape;
     }
 
@@ -59,20 +57,20 @@ public class Piece {
     }
 
     public void changeX(int amount) {
-        for (int i = 0; i < shape.length; i++) {
-            shape[i].changeX(amount);
+        for (int i = 0; i < shape.size(); i++) {
+            shape.get(i).changeX(amount);
         }
     }
 
     public void decrementY() {
-        for (int i = 0; i < shape.length; i++) {
-            shape[i].changeY(1);
+        for (int i = 0; i < shape.size(); i++) {
+            shape.get(i).changeY(1);
         }
     }
 
     public Coordinate getLowestPoint() {
-        int lowest = shape[0].getCoords().getY();
-        Coordinate lowestCoords = shape[0].getCoords();
+        int lowest = shape.get(0).getCoords().getY();
+        Coordinate lowestCoords = shape.get(0).getCoords();
 
         for (Block c: shape) {
             if (c.getCoords().getY() > lowest) {
