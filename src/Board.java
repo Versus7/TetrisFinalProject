@@ -42,7 +42,7 @@ public class Board {
     public void movePieceDown() {
         // TODO: Fix condition checking if piece is at the bottom of the game thing
         System.out.println("(" + currentPiece.getLowestPoint().getX() + ", " + currentPiece.getLowestPoint().getY() + ")");
-        if (!containsPoint(new Coordinate(currentPiece.getLowestPoint().getX(), currentPiece.getLowestPoint().getY()+1)) && currentPiece.getLowestPoint().getY() < 15) {
+        if (!containsPoint(new Coordinate(currentPiece.getLowestPoint().getX(), currentPiece.getLowestPoint().getY()+1)) && currentPiece.getLowestPoint().getY() < 20) {
             // System.out.println("No block detected!");
             currentPiece.decrementY();
         } else {
