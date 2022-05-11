@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Board {
-    Block[][] grid = new Block[20][10];
-    ArrayList<Piece> allPieces = new ArrayList<Piece>();
+    private ArrayList<Piece> allPieces = new ArrayList<Piece>();
+    private Piece currentPiece = new Piece(Piece.shapeType.LSHAPE, 5, 0);
 
     public Board() {
         allPieces.add(new Piece(Piece.shapeType.LSHAPE, 15, 2));
@@ -14,12 +14,21 @@ public class Board {
         return allPieces;
     }
 
+    public Piece getCurrentPiece() {
+        return currentPiece;
+    }
+
+    public void generateNewPiece() {
+        allPieces.add(currentPiece);
+        currentPiece = new Piece(Piece.shapeType.LSHAPE, 7, 0);
+    }
+
     public void clearRow(int rowNum) {
 
     }
 
     public void addPiece(Piece a) {
-
+        allPieces.add(a);
     }
 
     public boolean containsPoint(Coordinate c) {
@@ -31,15 +40,18 @@ public class Board {
         return false;
     }
 
-    public String toString() {
-        String result = "";
-
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0;j < 10; j++) {
-                result += grid[i][j] + " ";
-            }
-            result += "\n";
+    public void movePieceDown() {
+        // TODO: Add condition checking if piece is at the bottom of the game thing
+        if (!containsPoint(new Coordinate(currentPiece.getLowestPoint().getX(), currentPiece.getLowestPoint().getY()+1))) {
+            System.out.println("No block detected!");
+            currentPiece.decrementY();
+        } else {
+            System.out.println("Block detected below! No movement");
+            generateNewPiece();
         }
-        return result;
+    }
+
+    public void movePieceRight() {
+
     }
 }

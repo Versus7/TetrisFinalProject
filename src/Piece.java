@@ -14,7 +14,8 @@ public class Piece {
     }
 
     private Block[] shape;
-    private Color color = Color.blue;
+    private static Color[] possibleColors = new Color[] {Color.blue, Color.orange, Color.yellow, Color.green, Color.red, Color.CYAN};
+    private Color color = possibleColors[(int)(Math.random()*possibleColors.length)];
 
     // center point to base the other points off of
     private Coordinate c;
@@ -54,27 +55,33 @@ public class Piece {
     }
 
     public void changeX(int amount) {
-        Direction toBeMoved = amount > 0 ? Direction.RIGHT : Direction.LEFT;
-        if (!withinBounds(toBeMoved)) {
-            return;
-        }
-
         for (int i = 0; i < shape.length; i++) {
             shape[i].changeX(amount);
         }
     }
 
     public void decrementY() {
-        if (!withinBounds(Direction.DOWN)) {
-            return;
-        }
-
         for (int i = 0; i < shape.length; i++) {
             shape[i].changeY(1);
         }
     }
 
+    public Coordinate getLowestPoint() {
+        int lowest = shape[0].getCoords().getY();
+        Coordinate lowestCoords = shape[0].getCoords();
+
+        for (Block c: shape) {
+            if (c.getCoords().getY() > lowest) {
+                lowest = c.getCoords().getY();
+                lowestCoords = c.getCoords();
+            }
+        }
+
+        return lowestCoords;
+    }
+
     public void draw(Graphics g) {
+        g.setColor(color);
         for (Block b: shape) {
             b.draw(g);
         }
