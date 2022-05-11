@@ -5,7 +5,6 @@ public class Board {
     private Piece currentPiece = new Piece(Piece.shapeType.LSHAPE, 5, 0);
 
     public Board() {
-        allPieces.add(new Piece(Piece.shapeType.LSHAPE, 15, 2));
         allPieces.add(new Piece(Piece.shapeType.SQUARE, 7, 7));
 
     }

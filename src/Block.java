@@ -3,6 +3,7 @@ import java.awt.Color;
 
 public class Block {
     Coordinate coordinate;
+    public static final int SQUAREWIDTH = 39;
 
     public Block(int x, int y) {
         coordinate = new Coordinate(x, y);
@@ -22,6 +23,6 @@ public class Block {
 
     public void draw(Graphics g) {
         // g.setColor(Color.blue);
-        g.fillRect(coordinate.getX()*50, coordinate.getY()*50, 50, 50);
+        g.fillRect(coordinate.getX()*SQUAREWIDTH, coordinate.getY()*SQUAREWIDTH, SQUAREWIDTH, SQUAREWIDTH);
     }
 }
