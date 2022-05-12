@@ -19,22 +19,19 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
         // System.out.println(e.getKeyCode());
         if (e.getKeyCode() == 65) {
             // move left
-            // panel.getBoard().getCurrentPiece().changeX(-1);
             panel.getBoard().movePieceLeft();
        } else if (e.getKeyCode() == 68) {
            // move right
-        //    panel.getBoard().getCurrentPiece().changeX(1);
-        panel.getBoard().movePieceRight();
+            panel.getBoard().movePieceRight();
        } else if (e.getKeyCode() == 83) {
            // move downwards, faster
             if (inFocus) {
-                panel.getBoard().movePieceDown();
+                panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
             }
        } else if (e.getKeyCode() == 70) {
            // "f" key to test new piece generation
            panel.getBoard().generateNewPiece();
        }
-    //    System.out.println(e.getKeyCode());
        panel.repaint();
         
     }
@@ -57,7 +54,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if (inFocus) {
-            panel.getBoard().movePieceDown();;
+            panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
             panel.repaint();
         }
     }

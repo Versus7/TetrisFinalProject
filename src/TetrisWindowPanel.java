@@ -1,7 +1,5 @@
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();
@@ -28,7 +26,6 @@ public class TetrisWindowPanel extends JPanel {
         }
 
         board.getCurrentPiece().draw(g);
-        // repaint();
         for (Piece p: board.getAllPieces()) {
             p.draw(g);
         }

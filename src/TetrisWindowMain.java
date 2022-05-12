@@ -14,8 +14,6 @@ public class TetrisWindowMain {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
 
-        // unclear if this next line is needed
-        // window.requestFocusInWindow();
         panel.requestFocusInWindow();
     }
 }
