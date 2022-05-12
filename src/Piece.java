@@ -51,11 +51,9 @@ public class Piece {
     }
 
     public void removeInRow(int row) {
-        int blocksRemoved = 0;
         for (int i = 0; i < getShape().size(); i++) {
             if (getShape().get(i).getCoords().getY() == row) {
                 getShape().remove(i);
-                blocksRemoved++;
             }
         }
     }
