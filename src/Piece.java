@@ -8,12 +8,6 @@ public class Piece {
         SQUARE
     }
 
-    private enum Direction {
-        LEFT,
-        RIGHT,
-        DOWN
-    }
-
     private ArrayList<Block> shape = new ArrayList<Block>();
     private static Color[] possibleColors = new Color[] {Color.blue, Color.orange, Color.yellow, Color.green, Color.red, Color.CYAN};
     private Color color = possibleColors[(int)(Math.random()*possibleColors.length)];
@@ -56,6 +50,17 @@ public class Piece {
         return false;
     }
 
+    public void removeInRow(int row) {
+        int blocksRemoved = 0;
+        for (int i = 0; i < getShape().size(); i++) {
+            if (getShape().get(i).getCoords().getY() == row) {
+                getShape().remove(i);
+                blocksRemoved++;
+            }
+        }
+        System.out.println("Removed " + blocksRemoved + " blocks!");
+    }
+
     public void changeX(int amount) {
         for (int i = 0; i < shape.size(); i++) {
             shape.get(i).changeX(amount);
@@ -69,7 +74,7 @@ public class Piece {
     }
 
     public Coordinate getLowestPoint() {
-        int lowest = shape.get(0).getCoords().getY();
+        int lowest = Integer.MIN_VALUE;
         Coordinate lowestCoords = shape.get(0).getCoords();
 
         for (Block c: shape) {
@@ -88,32 +93,4 @@ public class Piece {
             b.draw(g);
         }
     }
-
-    // public boolean withinBounds(Direction d) {
-    //     if (d == Direction.RIGHT) {
-    //         for (Block b: shape) {
-    //             if (b.coordinate.getX() > 8) {
-    //                 return false;
-    //             }
-    //         }
-    //         return true;
-    //     } else if (d == Direction.LEFT) {
-    //         for (Block b: shape) {
-    //             if (b.coordinate.getX() < 1) {
-    //                 return false;
-    //             }
-    //         }
-
-    //         return true;
-    //     } else {
-    //         for (Block b: shape) {
-    //             if (b.coordinate.getY() > 18) {
-    //                 return false;
-    //             }
-    //         }
-
-    //         return true;
-    //     }
-    // }
-
 }
