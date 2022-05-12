@@ -58,7 +58,6 @@ public class Piece {
                 blocksRemoved++;
             }
         }
-        System.out.println("Removed " + blocksRemoved + " blocks!");
     }
 
     public void changeX(int amount) {
