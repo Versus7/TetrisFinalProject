@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 public class Board {
     private ArrayList<Piece> allPieces = new ArrayList<Piece>();
-    private Piece currentPiece = new Piece(Piece.shapeType.LSHAPE, 5, 0);
+    private Piece.shapeType[] types = Piece.shapeType.values();
+    private Piece currentPiece = new Piece(types[(int)(Math.random()*types.length)], 5, 0);
 
     public Board() {}
 
@@ -16,11 +17,12 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        currentPiece = new Piece(Piece.shapeType.LSHAPE, (int)(Math.random()*10), -3);
+        currentPiece = new Piece(types[(int)(Math.random()*types.length)], 5, -3);
         clearRow(checkRowFull());
     }
 
     public void clearRow(ArrayList<Integer> rowsToClear) {
+        ArrayList<Piece> piecesWithClearedBlocks = new ArrayList<Piece>();
        if (rowsToClear.size() <= 0) {
            return;
        } 
@@ -29,10 +31,22 @@ public class Board {
            // remove rows
 
            for (Piece p: getAllPieces()) {
-               p.removeInRow(row);
+               for (Coordinate c: p.getLowestPoints()) {
+                   if (c.getY() < row) {
+                       piecesWithClearedBlocks.add(p);
+                       break;
+                   }
+               }
+               if (p.removeInRow(row)) {
+                   getAllPieces().remove(p);
+               }
            }
 
            // move above rows, down
+       }
+
+       for (int i = 0; i < piecesWithClearedBlocks.size(); i++) {
+           movePieceDown(piecesWithClearedBlocks.get(i));
        }
     }
 
@@ -58,10 +72,6 @@ public class Board {
         return rowToClear;
     }
 
-    public void addPiece(Piece a) {
-        allPieces.add(a);
-    }
-
     public boolean containsPoint(Coordinate c) {
         for (Piece p: allPieces) {
             if (p.containsPoint(c)) {
@@ -71,26 +81,18 @@ public class Board {
         return false;
     }
 
-    public Piece containsPoint(Coordinate c, boolean a) {
-        Piece found = null;
-        for (Piece p: allPieces) {
-            if (p.containsPoint(c)) {
-              found = p;  
+    public void movePieceDown(Piece a) {
+        for (Coordinate c: a.getLowestPoints()) {
+            if (containsPoint(new Coordinate(c.getX(), c.getY() + 1)) || c.getY() == 19) {
+                System.out.println("block below, creating new block");
+                generateNewPiece();
+                return;
             }
         }
-        return found;
-    }
 
-    public void movePieceDown(Piece a) {
-        // TODO: Fix condition checking if piece is at the bottom of the game thing
-        // System.out.println("(" + currentPiece.getLowestPoint().getX() + ", " + currentPiece.getLowestPoint().getY() + ")");
-        if (!containsPoint(new Coordinate(a.getLowestPoint().getX(), a.getLowestPoint().getY()+1))
-         && a.getLowestPoint().getY() < 19) {
-            // System.out.println("No block detected!");
+        if (a.getLowestPoints().get(0).getY() < 19) {
+            System.out.println("moving block down");
             a.decrementY();
-        } else {
-            // System.out.println("Block detected below! No movement");
-            generateNewPiece();
         }
     }
 
@@ -114,4 +116,5 @@ public class Board {
         }
 
         currentPiece.changeX(-1);
-    }}
+    }
+}
