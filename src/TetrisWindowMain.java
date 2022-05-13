@@ -9,7 +9,7 @@ public class TetrisWindowMain {
 
         window.setContentPane(panel);
         
-        window.setSize(400, 800);
+        window.setSize(200, 400);
         window.setLocation(100, 100);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
