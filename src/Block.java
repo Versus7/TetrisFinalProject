@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Block {
@@ -20,6 +21,16 @@ public class Block {
     }
 
     public void draw(Graphics g) {
+        Color normal = g.getColor();
+
+        g.setColor(Color.black);
         g.fillRect(coordinate.getX()*TetrisWindowPanel.SQUAREWIDTH, coordinate.getY()*TetrisWindowPanel.SQUAREWIDTH, TetrisWindowPanel.SQUAREWIDTH, TetrisWindowPanel.SQUAREWIDTH);
+
+        g.setColor(normal);
+        g.fillRect(coordinate.getX()*TetrisWindowPanel.SQUAREWIDTH, coordinate.getY()*TetrisWindowPanel.SQUAREWIDTH, (int)(TetrisWindowPanel.SQUAREWIDTH*0.95), (int)(TetrisWindowPanel.SQUAREWIDTH*0.95));
+    }
+
+    public String toString() {
+        return getCoords().toString();
     }
 }

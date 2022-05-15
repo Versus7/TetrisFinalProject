@@ -2,8 +2,11 @@ import java.util.ArrayList;
 
 public class Board {
     private ArrayList<Piece> allPieces = new ArrayList<Piece>();
-    private Piece.shapeType[] types = Piece.shapeType.values();
-    private Piece currentPiece = new Piece(types[(int)(Math.random()*types.length)], 5, 0);
+    private shapeType[] types = shapeType.values();
+
+    // TODO: Fix ahrdcoded value below
+    // private Piece currentPiece = new Piece(types[(int)(Math.random()*types.length)], 5, 0);
+    private Piece currentPiece = new IBlock(5, 0);
 
     public Board() {}
 
@@ -17,7 +20,8 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        currentPiece = new Piece(types[(int)(Math.random()*types.length)], 5, -3);
+        // currentPiece = new Piece(types[(int)(Math.random()*types.length)], 5, -3);
+        currentPiece = new IBlock(5, -3);
         clearRow(checkRowFull());
     }
 
@@ -81,19 +85,20 @@ public class Board {
         return false;
     }
 
-    public void movePieceDown(Piece a) {
+    public boolean movePieceDown(Piece a) {
         for (Coordinate c: a.getLowestPoints()) {
             if (containsPoint(new Coordinate(c.getX(), c.getY() + 1)) || c.getY() == 19) {
-                System.out.println("block below, creating new block");
+                // System.out.println("block below, creating new block");
                 generateNewPiece();
-                return;
+                return true;
             }
         }
 
         if (a.getLowestPoints().get(0).getY() < 19) {
-            System.out.println("moving block down");
+            // System.out.println("moving block down");
             a.decrementY();
         }
+        return false;
     }
 
     public void movePieceRight() {

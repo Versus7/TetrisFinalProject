@@ -2,39 +2,13 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Piece {
-    public static enum shapeType {
-        LSHAPE,
-        SQUARE
-    }
-
+public abstract class Piece {
     private ArrayList<Block> shape = new ArrayList<Block>();
-    private static Color[] possibleColors = new Color[] {Color.blue, Color.orange, Color.yellow, Color.green, Color.red, Color.CYAN};
-    private Color color = possibleColors[(int)(Math.random()*possibleColors.length)];
+    private Color color;
 
-    // center point to base the other points off of
-    private Coordinate c;
     public Piece(shapeType t, int x, int y) {
-        c = new Coordinate(x, y);
-        
-        switch (t) {
-            case LSHAPE:
-                // System.out.println("An l shaped block has been created!");
-                shape.add(new Block(c.getX(), c.getY()));
-                shape.add(new Block(c.getX(), c.getY() + 1));
-                shape.add(new Block(c.getX(), c.getY() + 2));
-                shape.add(new Block(c.getX(), c.getY() + 3));
-                break;
-            case SQUARE:
-                // System.out.println("A square shaped block has been created!");
-                shape.add(new Block(c.getX(), c.getY()));
-                shape.add(new Block(c.getX() + 1, c.getY()));
-                shape.add(new Block(c.getX(), c.getY()+1));
-                shape.add(new Block(c.getX()+1, c.getY()+1));
-                break;
-            default:
-                System.out.println("Some other type has been created!");
-        }
+        ShapeInitializer.makeShape(t, x, y, shape);
+        color = ShapeInitializer.switchColor(t);
     }
 
     public ArrayList<Block> getShape() {
@@ -50,12 +24,13 @@ public class Piece {
         return false;
     }
 
-    public void removeInRow(int row) {
+    public boolean removeInRow(int row) {
         for (int i = 0; i < getShape().size(); i++) {
             if (getShape().get(i).getCoords().getY() == row) {
                 getShape().remove(i);
             }
         }
+        return getShape().size() == 0;
     }
 
     public void changeX(int amount) {
@@ -68,20 +43,74 @@ public class Piece {
         for (int i = 0; i < shape.size(); i++) {
             shape.get(i).changeY(1);
         }
+        System.out.println(getShape().toString());
     }
 
-    public Coordinate getLowestPoint() {
+    // TODO: Return an arrayList because there can be multiple lowest points in say like a square
+    public ArrayList<Coordinate> getLowestPoints() {
+        ArrayList<Coordinate> lowestPieces = new ArrayList<Coordinate>();
         int lowest = Integer.MIN_VALUE;
-        Coordinate lowestCoords = shape.get(0).getCoords();
 
+        // find the lowest value
         for (Block c: shape) {
             if (c.getCoords().getY() > lowest) {
                 lowest = c.getCoords().getY();
-                lowestCoords = c.getCoords();
             }
         }
 
-        return lowestCoords;
+        // add blocks with the lowest value to an arraylist
+        for (Block c: shape) {
+            if (c.getCoords().getY() == lowest) {
+                lowestPieces.add(c.getCoords());
+            }
+        }
+
+        // return the array list
+        return lowestPieces;
+    }
+
+    public Coordinate getCenterPoint() {
+        int avgX = 0;
+        int avgY = 0;
+
+        for (Block b: getShape()) {
+            avgX += b.getCoords().getX();
+            avgY += b.getCoords().getY();
+        }
+        return new Coordinate(avgX / 4, avgY / 4);
+    }
+    
+    private void rotate(double d) {
+        Coordinate originalLowest = getCenterPoint();
+        System.out.println("Original center: " + originalLowest);
+        double degrees = Math.toRadians(d);
+        for (int i = 0; i < 4; i++) {
+            int originalX = getShape().get(i).getCoords().getX();
+            int originalY = getShape().get(i).getCoords().getY();
+
+            getShape().get(i).getCoords().setX(Math.abs((int)(originalX*Math.cos(degrees)-originalY*Math.sin(degrees))));
+            getShape().get(i).getCoords().setY(Math.abs((int)(originalX*Math.sin(degrees)+originalY*Math.cos(degrees))));
+
+        }
+
+        // fix values
+        System.out.println("Rotated center: " + getCenterPoint());
+        int offsetX = originalLowest.getX() - getCenterPoint().getX();
+        int offsetY = originalLowest.getY() - getCenterPoint().getY();
+
+        for (int i = 0; i < 4; i++) {
+            getShape().get(i).changeX(offsetX);
+            getShape().get(i).changeY(offsetY);
+        }
+        System.out.println("Rotated: " + getShape().toString());
+    }
+
+    public void rotateRight() {
+        rotate(-90);
+    }
+
+    public void rotateLeft() {
+        rotate(90);
     }
 
     public void draw(Graphics g) {
