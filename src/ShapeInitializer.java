@@ -53,7 +53,8 @@ public class ShapeInitializer {
             case SQUARE:
                 return Color.yellow;
             case PYRAMID:
-                return Color.getHSBColor(300, 100, 50);
+                float[] colorValues = Color.RGBtoHSB(146, 5, 240, null);
+                return Color.getHSBColor(colorValues[0], colorValues[1], colorValues[2]);
             case RSNAKE:
                 return Color.green;
             case LSNAKE:
