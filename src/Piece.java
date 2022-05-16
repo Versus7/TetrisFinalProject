@@ -81,28 +81,40 @@ public abstract class Piece {
     }
     
     private void rotate(double d) {
-        Coordinate originalLowest = getCenterPoint();
-        System.out.println("Original center: " + originalLowest);
+        Coordinate center = getCenterPoint();
+        double centerX = center.getX();
+        double centerY = center.getY();
+
+        System.out.println("Center: " + center);
+
         double degrees = Math.toRadians(d);
-        for (int i = 0; i < 4; i++) {
-            int originalX = getShape().get(i).getCoords().getX();
-            int originalY = getShape().get(i).getCoords().getY();
-
-            getShape().get(i).getCoords().setX(Math.abs((int)(originalX*Math.cos(degrees)-originalY*Math.sin(degrees))));
-            getShape().get(i).getCoords().setY(Math.abs((int)(originalX*Math.sin(degrees)+originalY*Math.cos(degrees))));
-
-        }
-
-        // fix values
-        System.out.println("Rotated center: " + getCenterPoint());
-        int offsetX = originalLowest.getX() - getCenterPoint().getX();
-        int offsetY = originalLowest.getY() - getCenterPoint().getY();
 
         for (int i = 0; i < 4; i++) {
-            getShape().get(i).changeX(offsetX);
-            getShape().get(i).changeY(offsetY);
+            double originalX = getShape().get(i).getCoords().getX();
+            double originalY = getShape().get(i).getCoords().getY();
+
+            double calculatedX = originalX*Math.cos(degrees)-originalY*Math.sin(degrees) + 
+            centerX - (centerX*Math.cos(degrees)-centerY*Math.sin(degrees));
+            double calculatedY = originalX*Math.sin(degrees)+originalY*Math.cos(degrees) +
+            centerY - (centerX*Math.sin(degrees)+centerY*Math.cos(degrees));
+
+            System.out.println("New x (double): " + calculatedX);
+            System.out.println("New y (double): " + calculatedY);
+
+            System.out.print(getShape().get(i) + " --> ");
+
+            getShape().get(i).getCoords().setX(
+                (int)(Math.round(calculatedX))
+            );
+
+            getShape().get(i).getCoords().setY(
+                (int)(Math.round(calculatedY))
+            );
+
+            System.out.print(getShape().get(i));
+            System.out.println();
+
         }
-        System.out.println("Rotated: " + getShape().toString());
     }
 
     public void rotateRight() {
