@@ -2,11 +2,7 @@ import java.util.ArrayList;
 
 public class Board {
     private ArrayList<Piece> allPieces = new ArrayList<Piece>();
-    private shapeType[] types = shapeType.values();
-
-    // TODO: Fix ahrdcoded value below
-    // private Piece currentPiece = new Piece(types[(int)(Math.random()*types.length)], 5, 0);
-    private Piece currentPiece = new IBlock(5, 0);
+    private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
 
     public Board() {}
 
@@ -20,8 +16,7 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        // currentPiece = new Piece(types[(int)(Math.random()*types.length)], 5, -3);
-        currentPiece = new IBlock(5, -3);
+        currentPiece = ShapeInitializer.getRandomPiece(5);
         clearRow(checkRowFull());
     }
 
