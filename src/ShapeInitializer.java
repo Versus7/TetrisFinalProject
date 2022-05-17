@@ -67,4 +67,27 @@ public class ShapeInitializer {
                 return Color.black;
         }
     }
+
+    public static Piece getRandomPiece(int x) {
+        int index = (int)(Math.random()*7)+1;
+
+        switch(index) {
+            case 1:
+                return new IBlock(x);
+            case 2:
+                return new SquareBlock(x);
+            case 3:
+                return new TBlock(x);
+            case 4:
+                return new RSnakeBlock(x);
+            case 5:
+                return new LSnakeBlock(x);
+            case 6:
+                return new LeftL(x);
+            case 7:
+                return new RightL(x);
+            default:
+                return null;
+        }
+    }
 }
