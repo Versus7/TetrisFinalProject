@@ -1,5 +1,10 @@
+package Views;
 import java.awt.*;
 import javax.swing.*;
+
+// file imports
+import Models.Board;
+import Models.Piece;
 
 public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();

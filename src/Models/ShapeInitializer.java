@@ -1,4 +1,14 @@
+package Models;
 import java.util.ArrayList;
+
+import BlockTypes.IBlock;
+import BlockTypes.LSnakeBlock;
+import BlockTypes.LeftL;
+import BlockTypes.RSnakeBlock;
+import BlockTypes.RightL;
+import BlockTypes.SquareBlock;
+import BlockTypes.TBlock;
+
 import java.awt.Color;
 
 public class ShapeInitializer {

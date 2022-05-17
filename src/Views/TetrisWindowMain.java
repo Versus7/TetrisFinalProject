@@ -1,3 +1,4 @@
+package Views;
 import javax.swing.*;
 
 public class TetrisWindowMain {
@@ -10,7 +11,10 @@ public class TetrisWindowMain {
         window.setContentPane(panel);
         
         window.setSize(200, 400);
-        window.setLocation(100, 100);
+
+        // TODO: what does the following line do?
+        // window.setLocation(100, 100);
+        
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
 

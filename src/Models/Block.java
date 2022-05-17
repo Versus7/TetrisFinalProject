@@ -1,5 +1,8 @@
+package Models;
 import java.awt.Color;
 import java.awt.Graphics;
+
+import Views.TetrisWindowPanel;
 
 public class Block {
     Coordinate coordinate;

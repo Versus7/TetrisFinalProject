@@ -1,5 +1,9 @@
+package Views;
 import java.awt.event.*;
 import javax.swing.Timer;
+
+// file imports
+import Models.Piece;
 
 public class TetrisWindowListener implements KeyListener, ActionListener, FocusListener {
     TetrisWindowPanel panel;
@@ -16,7 +20,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println(e.getKeyCode());
+        // System.out.println(e.getKeyCode());
         if (e.getKeyCode() == 65) { // move left
             panel.getBoard().movePieceLeft();
        } else if (e.getKeyCode() == 68) { // move right
