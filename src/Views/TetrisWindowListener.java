@@ -29,7 +29,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
             if (inFocus) {
                 panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
             }
-       } else if (e.getKeyCode() == 87) { // drop down as much as possible
+       } else if (e.getKeyCode() == 32) { // drop down as much as possible
             // TODO: Remove hardcoding
             Piece temp = panel.getBoard().getCurrentPiece();
             while (temp == panel.getBoard().getCurrentPiece()) {
