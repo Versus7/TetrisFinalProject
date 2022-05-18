@@ -2,9 +2,6 @@ package Models;
 import java.util.ArrayList;
 
 import BlockTypes.IBlock;
-import BlockTypes.RSnakeBlock;
-import BlockTypes.SquareBlock;
-import BlockTypes.TBlock;
 
 public class Board {
     private ArrayList<Piece> allPieces = new ArrayList<Piece>();
@@ -22,13 +19,12 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        currentPiece = ShapeInitializer.getRandomPiece(5);
-        // currentPiece = new RSnakeBlock(5);
+        // currentPiece = ShapeInitializer.getRandomPiece(5);
+        currentPiece = new IBlock(5);
         clearRow(checkRowFull());
     }
 
     public void clearRow(ArrayList<Integer> rowsToClear) {
-        ArrayList<Piece> piecesWithClearedBlocks = new ArrayList<Piece>();
        if (rowsToClear.size() <= 0) {
            return;
        }
@@ -37,10 +33,20 @@ public class Board {
         for (int row: rowsToClear) {
             // remove rows
 
-            for (Piece p: getAllPieces()) {
-                p.removeInRow(row);
+            for (int i = 0; i < getAllPieces().size(); i++) {
+                if (getAllPieces().get(i).removeInRow(row)) {
+                    getAllPieces().remove(i);
+                    i--;
+                }
+            }
+            
+            for (int j = 0; j < getAllPieces().size(); j++) {
+                if (getAllPieces().get(j).getLowestPoints().get(0).getY() < row) {
+                    movePieceDown(getAllPieces().get(j));
+                }
             }
         }
+
     }
 
     /**

@@ -27,15 +27,12 @@ public abstract class Piece {
 
     public boolean removeInRow(int row) {
         // System.out.println("Block shape: " + getShape().toString());
-        int count = 0;
         for (int i = 0; i < getShape().size(); i++) {
             if (getShape().get(i).getCoords().getY() == row) {
                 getShape().remove(i);
                 i--;
-                count++;
             }
         }
-        System.out.println(count + " blocks removed!");
         return getShape().size() == 0;
     }
 
@@ -49,6 +46,30 @@ public abstract class Piece {
         for (int i = 0; i < shape.size(); i++) {
             shape.get(i).changeY(1);
         }
+        // System.out.println(getShape().toString());
+    }
+
+    // TODO: Return an arrayList because there can be multiple lowest points in say like a square
+    public ArrayList<Coordinate> getLowestPoints() {
+        ArrayList<Coordinate> lowestPieces = new ArrayList<Coordinate>();
+        int lowest = Integer.MIN_VALUE;
+
+        // find the lowest value
+        for (Block c: shape) {
+            if (c.getCoords().getY() > lowest) {
+                lowest = c.getCoords().getY();
+            }
+        }
+
+        // add blocks with the lowest value to an arraylist
+        for (Block c: shape) {
+            if (c.getCoords().getY() == lowest) {
+                lowestPieces.add(c.getCoords());
+            }
+        }
+
+        // return the array list
+        return lowestPieces;
     }
 
     public Coordinate getCenterPoint() {
