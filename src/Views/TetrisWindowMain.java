@@ -12,8 +12,7 @@ public class TetrisWindowMain {
         
         window.setSize(200, 400);
 
-        // TODO: what does the following line do?
-        // window.setLocation(100, 100);
+        window.setLocation(500, 200);
         
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);

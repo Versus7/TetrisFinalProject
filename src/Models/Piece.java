@@ -44,7 +44,7 @@ public abstract class Piece {
         for (int i = 0; i < shape.size(); i++) {
             shape.get(i).changeY(1);
         }
-        System.out.println(getShape().toString());
+        // System.out.println(getShape().toString());
     }
 
     // TODO: Return an arrayList because there can be multiple lowest points in say like a square
@@ -86,7 +86,7 @@ public abstract class Piece {
         double centerX = center.getX();
         double centerY = center.getY();
 
-        System.out.println("Center: " + center);
+        // System.out.println("Center: " + center);
 
         double degrees = Math.toRadians(d);
 
@@ -99,10 +99,10 @@ public abstract class Piece {
             double calculatedY = originalX*Math.sin(degrees)+originalY*Math.cos(degrees) +
             centerY - (centerX*Math.sin(degrees)+centerY*Math.cos(degrees));
 
-            System.out.println("New x (double): " + calculatedX);
-            System.out.println("New y (double): " + calculatedY);
+            // System.out.println("New x (double): " + calculatedX);
+            // System.out.println("New y (double): " + calculatedY);
 
-            System.out.print(getShape().get(i) + " --> ");
+            // System.out.print(getShape().get(i) + " --> ");
 
             getShape().get(i).getCoords().setX(
                 (int)(Math.round(calculatedX))
@@ -112,18 +112,21 @@ public abstract class Piece {
                 (int)(Math.round(calculatedY))
             );
 
-            System.out.print(getShape().get(i));
-            System.out.println();
+            // System.out.print(getShape().get(i));
+            // System.out.println();
 
         }
     }
 
     public void rotateRight() {
-        rotate(-90);
+        System.out.println("Rotating right!");
+        rotate(90);
+        decrementY();
     }
 
     public void rotateLeft() {
-        rotate(90);
+        System.out.println("Rotating left!");
+        rotate(-90);
     }
 
     public void draw(Graphics g) {

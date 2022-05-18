@@ -12,7 +12,7 @@ public class TBlock extends Piece {
         // TODO: Adjust rotation so that it cannot rotate if it is on the bottom
         int centerX = getCenterPoint().getX();
         if (centerX < 8 && centerX > 1) {
-            super.rotateLeft();
+            super.rotateRight();
             // decrementY();
         }
     }
@@ -21,7 +21,7 @@ public class TBlock extends Piece {
     public void rotateLeft() {
         int centerY = getCenterPoint().getX();
         if (centerY < 8 && centerY > 1) {
-            super.rotateRight();
+            super.rotateLeft();
         }
     }
 }

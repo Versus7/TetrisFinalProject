@@ -1,6 +1,11 @@
 package Models;
 import java.util.ArrayList;
 
+import BlockTypes.IBlock;
+import BlockTypes.RSnakeBlock;
+import BlockTypes.SquareBlock;
+import BlockTypes.TBlock;
+
 public class Board {
     private ArrayList<Piece> allPieces = new ArrayList<Piece>();
     private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
@@ -17,7 +22,8 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        currentPiece = ShapeInitializer.getRandomPiece(5);
+        // currentPiece = ShapeInitializer.getRandomPiece(5);
+        currentPiece = new RSnakeBlock(5);
         clearRow(checkRowFull());
     }
 
@@ -27,28 +33,33 @@ public class Board {
            return;
        } 
 
-       for (int row: rowsToClear) {
+    //    for (int row: rowsToClear) {
            // remove rows
 
-           for (Piece p: getAllPieces()) {
-               for (Coordinate c: p.getLowestPoints()) {
-                   if (c.getY() < row) {
-                       piecesWithClearedBlocks.add(p);
-                       break;
-                   }
-               }
-               if (p.removeInRow(row)) {
-                   getAllPieces().remove(p);
-               }
-           }
+        //    for (Piece p: getAllPieces()) {
+        //     //    for (Coordinate c: p.getLowestPoints()) {
+        //     //        if (c.getY() < row) {
+        //     //            piecesWithClearedBlocks.add(p);
+        //     //            break;
+        //     //        }
+        //     //    }
+        //        if (p.removeInRow(row)) {
+        //            getAllPieces().remove(p);
+        //        }
+        //    }
+        // for (int i = 0; i < getAllPieces().size(); i++) {
+        //     if (getAllPieces().get(i).removeInRow(row)) {
+        //         getAllPieces().remove(i);
+        //     }
+        // }
 
            // move above rows, down
        }
 
-       for (int i = 0; i < piecesWithClearedBlocks.size(); i++) {
-           movePieceDown(piecesWithClearedBlocks.get(i));
-       }
-    }
+    //    for (int i = 0; i < piecesWithClearedBlocks.size(); i++) {
+    //        movePieceDown(piecesWithClearedBlocks.get(i));
+    //    }
+    // }
 
     /**
      * Method checks every row to see if rows are full
