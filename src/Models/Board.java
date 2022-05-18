@@ -22,8 +22,8 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        // currentPiece = ShapeInitializer.getRandomPiece(5);
-        currentPiece = new RSnakeBlock(5);
+        currentPiece = ShapeInitializer.getRandomPiece(5);
+        // currentPiece = new RSnakeBlock(5);
         clearRow(checkRowFull());
     }
 
@@ -31,35 +31,17 @@ public class Board {
         ArrayList<Piece> piecesWithClearedBlocks = new ArrayList<Piece>();
        if (rowsToClear.size() <= 0) {
            return;
-       } 
-
-    //    for (int row: rowsToClear) {
-           // remove rows
-
-        //    for (Piece p: getAllPieces()) {
-        //     //    for (Coordinate c: p.getLowestPoints()) {
-        //     //        if (c.getY() < row) {
-        //     //            piecesWithClearedBlocks.add(p);
-        //     //            break;
-        //     //        }
-        //     //    }
-        //        if (p.removeInRow(row)) {
-        //            getAllPieces().remove(p);
-        //        }
-        //    }
-        // for (int i = 0; i < getAllPieces().size(); i++) {
-        //     if (getAllPieces().get(i).removeInRow(row)) {
-        //         getAllPieces().remove(i);
-        //     }
-        // }
-
-           // move above rows, down
        }
+       System.out.println(rowsToClear.toString());
 
-    //    for (int i = 0; i < piecesWithClearedBlocks.size(); i++) {
-    //        movePieceDown(piecesWithClearedBlocks.get(i));
-    //    }
-    // }
+        for (int row: rowsToClear) {
+            // remove rows
+
+            for (Piece p: getAllPieces()) {
+                p.removeInRow(row);
+            }
+        }
+    }
 
     /**
      * Method checks every row to see if rows are full
@@ -91,20 +73,35 @@ public class Board {
         }
         return false;
     }
+    
+    // this overridden method of containsPoint checks the points of everything except the piece passed in
+    public boolean containsPoint(Coordinate c, Piece p) {
+        for (Piece piece: allPieces) {
+            if (piece == p) {
+                continue;
+            }
+
+            if (piece.containsPoint(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean movePieceDown(Piece a) {
-        for (Coordinate c: a.getLowestPoints()) {
-            if (containsPoint(new Coordinate(c.getX(), c.getY() + 1)) || c.getY() == 19) {
+        for (Block b: a.getShape()) {
+            Coordinate c = b.getCoords();
+            if (containsPoint(new Coordinate(c.getX(), c.getY() + 1), a) || c.getY() == 19) {
                 // System.out.println("block below, creating new block");
                 generateNewPiece();
                 return true;
             }
         }
 
-        if (a.getLowestPoints().get(0).getY() < 19) {
+        // if (a.getLowestPoints().get(0).getY() < 19) {
             // System.out.println("moving block down");
             a.decrementY();
-        }
+        // }
         return false;
     }
 
