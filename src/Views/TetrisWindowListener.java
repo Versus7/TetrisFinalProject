@@ -53,8 +53,6 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        // System.out.println("Key released!");
         switch (e.getKeyCode()) {
             case 70:
                 panel.getBoard().getCurrentPiece().rotateRight();
@@ -69,15 +67,10 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        // System.out.println("Key typed!");
-        
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         if (inFocus) {
             panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
             panel.repaint();
@@ -87,15 +80,11 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     @Override
     public void focusGained(FocusEvent e) {
         inFocus = true;
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
     public void focusLost(FocusEvent e) {
         inFocus = false;
-        // TODO Auto-generated method stub
-        
     }
 
 }

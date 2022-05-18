@@ -46,10 +46,8 @@ public abstract class Piece {
         for (int i = 0; i < shape.size(); i++) {
             shape.get(i).changeY(1);
         }
-        // System.out.println(getShape().toString());
     }
 
-    // TODO: Return an arrayList because there can be multiple lowest points in say like a square
     public ArrayList<Coordinate> getLowestPoints() {
         ArrayList<Coordinate> lowestPieces = new ArrayList<Coordinate>();
         int lowest = Integer.MIN_VALUE;
@@ -87,8 +85,6 @@ public abstract class Piece {
         Coordinate center = getCenterPoint();
         double centerX = center.getX();
         double centerY = center.getY();
-
-        // System.out.println("Center: " + center);
 
         double degrees = Math.toRadians(d);
 

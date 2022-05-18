@@ -36,8 +36,6 @@ public class TetrisWindowPanel extends JPanel {
         for (Piece p: board.getAllPieces()) {
             p.draw(g);
         }
-
-
     }
 
     public Board getBoard() {

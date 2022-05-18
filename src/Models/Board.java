@@ -1,8 +1,6 @@
 package Models;
 import java.util.ArrayList;
 
-import BlockTypes.IBlock;
-
 public class Board {
     private ArrayList<Piece> allPieces = new ArrayList<Piece>();
     private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
@@ -19,8 +17,8 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        // currentPiece = ShapeInitializer.getRandomPiece(5);
-        currentPiece = new IBlock(5);
+        currentPiece = ShapeInitializer.getRandomPiece(5);
+        // currentPiece = new IBlock(5);
         clearRow(checkRowFull());
     }
 
@@ -32,7 +30,6 @@ public class Board {
 
         for (int row: rowsToClear) {
             // remove rows
-
             for (int i = 0; i < getAllPieces().size(); i++) {
                 if (getAllPieces().get(i).removeInRow(row)) {
                     getAllPieces().remove(i);
@@ -46,7 +43,6 @@ public class Board {
                 }
             }
         }
-
     }
 
     /**
@@ -98,16 +94,13 @@ public class Board {
         for (Block b: a.getShape()) {
             Coordinate c = b.getCoords();
             if (containsPoint(new Coordinate(c.getX(), c.getY() + 1), a) || c.getY() == 19) {
-                // System.out.println("block below, creating new block");
                 generateNewPiece();
                 return true;
             }
         }
 
-        // if (a.getLowestPoints().get(0).getY() < 19) {
-            // System.out.println("moving block down");
-            a.decrementY();
-        // }
+        a.decrementY();
+
         return false;
     }
 
