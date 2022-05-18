@@ -21,26 +21,38 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     @Override
     public void keyPressed(KeyEvent e) {
         // System.out.println(e.getKeyCode());
-        if (e.getKeyCode() == 65) { // move left
-            panel.getBoard().movePieceLeft();
-       } else if (e.getKeyCode() == 68) { // move right
-            panel.getBoard().movePieceRight();
-       } else if (e.getKeyCode() == 83) { // move downwards, faster
-            if (inFocus) {
+        /**
+         * control - rotate piece left
+         * up arrow - rotate right
+         * c is hold
+         * spacebar insta drop
+         * eventually switch system to use arrow keys instead of WASD
+         */
+        switch (e.getKeyCode()) {
+            case 65:
+                panel.getBoard().movePieceLeft();
+                break;
+            case 68:
+                panel.getBoard().movePieceRight();
+                break;
+            case 83:
                 panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
-            }
-       } else if (e.getKeyCode() == 32) { // drop down as much as possible
-            // TODO: Remove hardcoding
-            Piece temp = panel.getBoard().getCurrentPiece();
-            while (temp == panel.getBoard().getCurrentPiece()) {
-                panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
-            }
-       } else if (e.getKeyCode() == 70) {
-           // rotate right
-           panel.getBoard().getCurrentPiece().rotateRight();
-       } else if (e.getKeyCode() == 81) {
-           panel.getBoard().getCurrentPiece().rotateLeft();
-       }
+                break;
+            case 32:
+                Piece temp = panel.getBoard().getCurrentPiece();
+                while (temp == panel.getBoard().getCurrentPiece()) {
+                    panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
+                }
+                break;
+            case 70:
+                panel.getBoard().getCurrentPiece().rotateRight();
+                break;
+            case 81:
+                panel.getBoard().getCurrentPiece().rotateLeft();
+                break;
+            default:
+                break;
+        }
        panel.repaint();
         
     }
