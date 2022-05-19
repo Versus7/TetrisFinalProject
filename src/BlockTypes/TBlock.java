@@ -11,17 +11,20 @@ public class TBlock extends Piece {
     public void rotateRight() {
         // TODO: Adjust rotation so that it cannot rotate if it is on the bottom
         int centerX = getCenterPoint().getX();
-        if (centerX < 8 && centerX > 1) {
+        int centerY = getCenterPoint().getY();
+        if (centerX < 8 && centerX >= 0 && centerY < 18) {
             super.rotateRight();
-            // decrementY();
+            changeX(1);
         }
     }
 
     @Override
     public void rotateLeft() {
-        int centerY = getCenterPoint().getX();
-        if (centerY < 8 && centerY > 1) {
+        int centerX = getCenterPoint().getX();
+        int centerY = getCenterPoint().getY();
+        if (centerX < 8 && centerX > 1 && centerY < 19) {
             super.rotateLeft();
+            changeY(1);
         }
     }
 }

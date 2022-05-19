@@ -21,7 +21,7 @@ public class RSnakeBlock extends Piece {
         int centerY = getCenterPoint().getX();
         if (centerY < 8 && centerY > 1) {
             super.rotateLeft();
-            decrementY();
+            changeY(1);
         }
     }
 }

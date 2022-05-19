@@ -9,12 +9,11 @@ public class IBlock extends Piece {
 
     @Override
     public void rotateRight() {
-        // TODO: Adjust rotation so that it cannot rotate if it is on the bottom
         int centerX = getCenterPoint().getX();
         int centerY = getCenterPoint().getY();
-        if (centerX < 8 && centerX > 0 && centerY < 17) {
+        if (centerX < 9 && centerX > 0 && centerY < 18) {
             super.rotateRight();
-            decrementY();
+            changeY(-1);
         }
     }
 
@@ -22,7 +21,7 @@ public class IBlock extends Piece {
     public void rotateLeft() {
         int centerX = getCenterPoint().getX();
         int centerY = getCenterPoint().getY();
-        if (centerX < 8 && centerX > 0) {
+        if (centerX < 8 && centerX > 0 && centerY < 18) {
             super.rotateLeft();
         }
     }
