@@ -1,5 +1,6 @@
 package Models;
 import java.util.ArrayList;
+import BlockTypes.*;
 
 public class Board {
     private ArrayList<Piece> allPieces = new ArrayList<Piece>();
@@ -17,8 +18,8 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        currentPiece = ShapeInitializer.getRandomPiece(5);
-        // currentPiece = new IBlock(5);
+        // currentPiece = ShapeInitializer.getRandomPiece(5);
+        currentPiece = new TBlock(5);
         clearRow(checkRowFull());
     }
 
@@ -99,7 +100,7 @@ public class Board {
             }
         }
 
-        a.decrementY();
+        a.changeY(1);
 
         return false;
     }

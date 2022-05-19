@@ -42,9 +42,9 @@ public abstract class Piece {
         }
     }
 
-    public void decrementY() {
+    public void changeY(int amount) {
         for (int i = 0; i < shape.size(); i++) {
-            shape.get(i).changeY(1);
+            shape.get(i).changeY(amount);
         }
     }
 
@@ -119,7 +119,7 @@ public abstract class Piece {
     public void rotateRight() {
         // System.out.println("Rotating right!");
         rotate(90);
-        decrementY();
+        changeY(1);
     }
 
     public void rotateLeft() {
