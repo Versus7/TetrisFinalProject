@@ -18,8 +18,7 @@ public class Board {
 
     public void generateNewPiece() {
         allPieces.add(currentPiece);
-        // currentPiece = ShapeInitializer.getRandomPiece(5);
-        currentPiece = new TBlock(5);
+        currentPiece = ShapeInitializer.getRandomPiece(5);
         clearRow(checkRowFull());
     }
 

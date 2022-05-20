@@ -25,12 +25,13 @@ public class TetrisWindowPanel extends JPanel {
         SQUAREWIDTH = getHeight() / 20;
 
         // drawing out the tetris grid
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 20; j++) {
-                g.drawRect(i*SQUAREWIDTH, j*SQUAREWIDTH, SQUAREWIDTH, SQUAREWIDTH);
-                // g.drawString(i + ", " + j, i*SQUAREWIDTH, j*SQUAREWIDTH);
-            }
-        }
+        // for (int i = 0; i < 10; i++) {
+        //     for (int j = 0; j < 20; j++) {
+        //         g.drawRect(i*SQUAREWIDTH, j*SQUAREWIDTH, SQUAREWIDTH, SQUAREWIDTH);
+        //         // g.drawString(i + ", " + j, i*SQUAREWIDTH, j*SQUAREWIDTH);
+        //     }
+        // }
+        g.drawRect(0, 0, SQUAREWIDTH*10, SQUAREWIDTH*20);
 
         board.getCurrentPiece().draw(g);
         for (Piece p: board.getAllPieces()) {
