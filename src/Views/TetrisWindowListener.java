@@ -7,11 +7,14 @@ import Models.Piece;
 
 public class TetrisWindowListener implements KeyListener, ActionListener, FocusListener {
     TetrisWindowPanel panel;
+    ScorePanel score;
     Timer timer;
     boolean inFocus = true;
 
-    public TetrisWindowListener(TetrisWindowPanel panel) {
+    public TetrisWindowListener(TetrisWindowPanel panel, ScorePanel score) {
         this.panel = panel;
+        this.score = score;
+
         panel.addKeyListener(this);
         panel.addFocusListener(this);
         timer = new Timer(1000, this);
@@ -74,6 +77,8 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
         if (inFocus) {
             panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
             panel.repaint();
+
+            
         }
     }
 

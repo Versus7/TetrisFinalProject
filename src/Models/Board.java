@@ -1,10 +1,10 @@
 package Models;
 import java.util.ArrayList;
-import BlockTypes.*;
 
 public class Board {
     private ArrayList<Piece> allPieces = new ArrayList<Piece>();
     private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
+    private int linesCleared = 0;
 
     public Board() {}
 
@@ -14,6 +14,10 @@ public class Board {
 
     public Piece getCurrentPiece() {
         return currentPiece;
+    }
+
+    public int getLinesCleared() {
+        return linesCleared;
     }
 
     public void generateNewPiece() {
@@ -26,6 +30,8 @@ public class Board {
        if (rowsToClear.size() <= 0) {
            return;
        }
+
+       linesCleared += rowsToClear.size();
        System.out.println(rowsToClear.toString());
 
         for (int row: rowsToClear) {
