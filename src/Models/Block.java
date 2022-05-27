@@ -25,12 +25,15 @@ public class Block {
 
     public void draw(Graphics g) {
         Color normal = g.getColor();
+        double squareSize = TetrisWindowPanel.SQUAREWIDTH;
+        double xCoord = (double)(coordinate.getX() * squareSize);
+        double yCoord = (double)(coordinate.getY() * squareSize);
 
         g.setColor(Color.black);
-        g.fillRect(coordinate.getX()*TetrisWindowPanel.SQUAREWIDTH, coordinate.getY()*TetrisWindowPanel.SQUAREWIDTH, TetrisWindowPanel.SQUAREWIDTH, TetrisWindowPanel.SQUAREWIDTH);
+        g.fillRect((int)(xCoord), (int)(yCoord), (int)(squareSize), (int)(squareSize));
 
         g.setColor(normal);
-        g.fillRect(coordinate.getX()*TetrisWindowPanel.SQUAREWIDTH, coordinate.getY()*TetrisWindowPanel.SQUAREWIDTH, (int)(TetrisWindowPanel.SQUAREWIDTH*0.95), (int)(TetrisWindowPanel.SQUAREWIDTH*0.95));
+        g.fillRect((int)(xCoord), (int)(yCoord), (int)(TetrisWindowPanel.SQUAREWIDTH*0.95), (int)(TetrisWindowPanel.SQUAREWIDTH*0.95));
     }
 
     public String toString() {

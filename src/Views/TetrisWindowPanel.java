@@ -8,7 +8,7 @@ import Models.Piece;
 
 public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();
-    public static int SQUAREWIDTH = 40;
+    public static Double SQUAREWIDTH;
 
     public TetrisWindowPanel() {
         JPanel everything = new JPanel();
@@ -22,7 +22,7 @@ public class TetrisWindowPanel extends JPanel {
         super.setBackground(Color.black);
         g.setColor(Color.white);
 
-        SQUAREWIDTH = getHeight() / 20;
+        SQUAREWIDTH = (double)(getHeight()) / 20.0;
 
         // drawing out the tetris grid
         // for (int i = 0; i < 10; i++) {
@@ -31,7 +31,7 @@ public class TetrisWindowPanel extends JPanel {
         //         // g.drawString(i + ", " + j, i*SQUAREWIDTH, j*SQUAREWIDTH);
         //     }
         // }
-        g.drawRect(0, 0, SQUAREWIDTH*10, SQUAREWIDTH*20);
+        g.drawRect(0, 0, (int)(SQUAREWIDTH*10), (int)(SQUAREWIDTH*20));
 
         board.getCurrentPiece().draw(g);
         for (Piece p: board.getAllPieces()) {
