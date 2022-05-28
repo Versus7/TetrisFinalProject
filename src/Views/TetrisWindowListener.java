@@ -51,7 +51,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
                 break;
         }
        panel.repaint();
-        
+       score.repaint(); 
     }
 
     @Override
@@ -76,9 +76,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     public void actionPerformed(ActionEvent e) {
         if (inFocus) {
             panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
-            panel.repaint();
-
-            
+            panel.repaint();            
         }
     }
 
