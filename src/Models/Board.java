@@ -32,6 +32,10 @@ public class Board {
         clearRow(checkRowFull());
     }
 
+    /**
+     * Clears rows that are full, and moves blocks above downwards
+     * @param rowsToClear the indices of the rows that are full
+     */
     public void clearRow(ArrayList<Integer> rowsToClear) {
        if (rowsToClear.size() <= 0) {
            return;
@@ -41,19 +45,13 @@ public class Board {
        System.out.println(rowsToClear.toString());
 
         for (int row: rowsToClear) {
-            // remove rows
-            int blocksRemoved = 0;
             for (int i = 0; i < allBlocks.size(); i++) {
                 if (allBlocks.get(i).getCoords().getY() == row) {
-                    // System.out.println("removing block number: " + i);
                     allBlocks.remove(i);
                     i--;
-                    blocksRemoved++;
                 }
             }
-            System.out.println("blocks removed: " + blocksRemoved);
 
-            // shift all blocks down using moveBLock method
             for (int i = 0; i < allBlocks.size(); i++) {
                 if (allBlocks.get(i).getCoords().getY() < row) {
                     allBlocks.get(i).changeY(1);
@@ -85,6 +83,11 @@ public class Board {
         return rowToClear;
     }
 
+    /**
+     * Method checks if a point is occupied or not by a block
+     * @param c the coordinate to check
+     * @return true if the point is occupied, false otherwise
+     */
     public boolean containsPoint(Coordinate c) {
         for (Block b: allBlocks) {
             if (b.getCoords().getX() == c.getX() && b.getCoords().getY() == c.getY()) {
@@ -94,6 +97,11 @@ public class Board {
         return false;
     }
     
+    /**
+     * Method checks if the piece can move down
+     * @param a piece to move down, if possible
+     * @return true if the piece can move down, false otherwise
+     */
     public boolean movePieceDown(Piece a) {
         for (Block b: a.getShape()) {
             Coordinate c = b.getCoords();
@@ -108,6 +116,12 @@ public class Board {
         return false;
     }
 
+    /**
+     * Method moves blocks down if possible
+     * Method is called when a row is to be cleared
+     * It moves all blocks above the row downwards if possible
+     * @param b block to move down
+     */
     public void moveBlockDown(Block b) {
         if (containsPoint(new Coordinate(b.getCoords().getX(), b.getCoords().getY() + 1)) || b.getCoords().getY() == 19) {
             return;
@@ -115,6 +129,10 @@ public class Board {
         b.changeY(1);
     }
 
+    /**
+     * The following two methods attempt to move a piece right or left
+     * If there is a piece in the way, or it is reaching the borders of the grid, the piece will not move
+     */
     public void movePieceRight() {
         for (Block b: currentPiece.getShape()) {
             if (containsPoint(new Coordinate(b.getCoords().getX() + 1, b.getCoords().getY()))
