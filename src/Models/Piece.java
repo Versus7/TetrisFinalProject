@@ -78,6 +78,30 @@ public abstract class Piece {
         return lowestPieces;
     }
 
+    public int getLeftmostCoordinate() {
+        int left = Integer.MAX_VALUE;
+
+        for (Block b: getShape()) {
+            if (b.getCoords().getX() < left) {
+                left = b.getCoords().getX();
+            }
+        }
+
+        return left;
+    }
+
+    public int getRightmostCoordinate() {
+        int right = Integer.MIN_VALUE;
+
+        for (Block b: getShape()) {
+            if (b.getCoords().getX() > right) {
+                right = b.getCoords().getX();
+            }
+        }
+
+        return right;
+    }
+
     public Coordinate getCenterPoint() {
         int avgX = 0;
         int avgY = 0;
