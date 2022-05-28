@@ -5,11 +5,8 @@ import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import Models.Board;
 
 public class ScorePanel extends JPanel {
-    private int score;
-    private int level;
     private JTextPane scoreLabel;
     private JTextPane levelLabel;
     
@@ -19,17 +16,16 @@ public class ScorePanel extends JPanel {
     public ScorePanel(TetrisWindowPanel game) {
         this.game = game;
 
-        score = 0;
-        level = 1;
-
         setLayout(new GridLayout(2, 1));
         setBackground(Color.black);
         setForeground(Color.white);
 
+        // Score Label
+        
         scoreLabel = new JTextPane();
-        scoreLabel.setText(score + "");
+        scoreLabel.setText(game.getBoard().getStats().getScore() + "");
         scoreLabel.setEditable(false);
-        scoreLabel.setBackground(Color.blue);
+        scoreLabel.setBackground(Color.black);
         scoreLabel.setForeground(Color.white);
         scoreLabel.setFont(new Font("System", Font.PLAIN, 20));
         
@@ -44,7 +40,7 @@ public class ScorePanel extends JPanel {
         // Level Label
 
         levelLabel = new JTextPane();
-        levelLabel.setText("Level: " + level);
+        levelLabel.setText("Level: " + game.getBoard().getStats().getLevel());
         levelLabel.setEditable(false);
         levelLabel.setBackground(Color.black);
         levelLabel.setForeground(Color.white);
@@ -58,22 +54,6 @@ public class ScorePanel extends JPanel {
         doc2.setParagraphAttributes(0, doc2.getLength(), center2, false);
     }
     
-    public void incrementScore(int amount) {
-        score += amount;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void incrementLevel() {
-        level++;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -81,10 +61,8 @@ public class ScorePanel extends JPanel {
         g.setColor(Color.white);
         g.setFont(new Font("System", Font.BOLD, 20));
 
-        scoreLabel.setText(score + "");
-        // TODO: Refine scoreLabel to ensure readability under any background color
-        scoreLabel.setBackground(game.getBoard().getCurrentPiece().getColor());
-        levelLabel.setText("Level " + level);
+        scoreLabel.setText(game.getBoard().getStats().getScore() + "");
+        levelLabel.setText("Level " + game.getBoard().getStats().getLevel());
     }
     
 }

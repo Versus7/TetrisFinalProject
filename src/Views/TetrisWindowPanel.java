@@ -4,7 +4,6 @@ import javax.swing.*;
 
 // file imports
 import Models.Board;
-import Models.Piece;
 import Models.Block;
 
 public class TetrisWindowPanel extends JPanel {
@@ -21,7 +20,7 @@ public class TetrisWindowPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         super.setBackground(Color.black);
-        g.setColor(Color.white);
+        g.setColor(board.getCurrentPiece().getColor());
 
         SQUAREWIDTH = (double)(getHeight()) / 20.0;
 

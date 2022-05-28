@@ -7,7 +7,7 @@ public class Board {
      */
     private ArrayList<Block> allBlocks = new ArrayList<Block>();
     private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
-    private int linesCleared = 0;
+    private Stats stats = new Stats();
 
     public Board() {}
 
@@ -19,8 +19,8 @@ public class Board {
         return currentPiece;
     }
 
-    public int getLinesCleared() {
-        return linesCleared;
+    public Stats getStats() {
+        return stats;
     }
 
     public void generateNewPiece() {
@@ -41,8 +41,9 @@ public class Board {
            return;
        }
 
-       linesCleared += rowsToClear.size();
-       System.out.println(rowsToClear.toString());
+    //    System.out.println("Rows to clear: " + rowsToClear.toString());
+    //    System.out.println("Size of rows to clear: " + (rowsToClear.size()-1));
+       stats.incrementScore(rowsToClear.size());
 
         for (int row: rowsToClear) {
             for (int i = 0; i < allBlocks.size(); i++) {
