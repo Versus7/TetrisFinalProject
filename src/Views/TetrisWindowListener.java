@@ -8,12 +8,14 @@ import Models.Piece;
 public class TetrisWindowListener implements KeyListener, ActionListener, FocusListener {
     TetrisWindowPanel panel;
     ScorePanel score;
+    InfoPanel info;
     Timer timer;
     boolean inFocus = true;
 
-    public TetrisWindowListener(TetrisWindowPanel panel, ScorePanel score) {
+    public TetrisWindowListener(TetrisWindowPanel panel, ScorePanel score, InfoPanel info) {
         this.panel = panel;
         this.score = score;
+        this.info = info;
 
         panel.addKeyListener(this);
         panel.addFocusListener(this);
@@ -52,6 +54,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
         }
        panel.repaint();
        score.repaint(); 
+       info.repaint();
     }
 
     @Override

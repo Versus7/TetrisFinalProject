@@ -12,14 +12,16 @@ public class TetrisWindowMain {
 
         TetrisWindowPanel game = new TetrisWindowPanel();
         ScorePanel score = new ScorePanel(game);
-        new TetrisWindowListener(game, score);
+        InfoPanel infoPanel = new InfoPanel(game);
+        new TetrisWindowListener(game, score, infoPanel);
         
         everything.add(game, BorderLayout.CENTER);
         everything.add(score, BorderLayout.SOUTH);
+        everything.add(infoPanel, BorderLayout.EAST);
 
         // JFrame configuration
         window.setContentPane(everything);
-        window.setSize(500, 1000);
+        window.setSize(1000, 1000);
         window.setLocation(500, 200);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
