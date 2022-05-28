@@ -10,6 +10,10 @@ public abstract class Piece {
     public Piece(shapeType t, int x, int y) {
         ShapeInitializer.makeShape(t, x, y, shape);
         color = ShapeInitializer.switchColor(t);
+
+        for (Block b: shape) {
+            b.setColor(color);
+        }
     }
 
     public ArrayList<Block> getShape() {
