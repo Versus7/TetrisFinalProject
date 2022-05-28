@@ -49,6 +49,8 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
                     panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
                 }
                 break;
+            case 72: // hold pieces
+                panel.getBoard().holdPiece();
             default:
                 break;
         }
@@ -79,7 +81,9 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     public void actionPerformed(ActionEvent e) {
         if (inFocus) {
             panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
-            panel.repaint();            
+            panel.repaint();       
+            score.repaint();
+            info.repaint();     
         }
     }
 

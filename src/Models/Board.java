@@ -7,6 +7,10 @@ public class Board {
      */
     private ArrayList<Block> allBlocks = new ArrayList<Block>();
     private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
+    
+    private Piece heldPiece;
+    private Piece[] upcomingPieces = new Piece[3];
+
     private Stats stats = new Stats();
 
     public Board() {}
@@ -23,6 +27,10 @@ public class Board {
         return stats;
     }
 
+    public Piece getHeldPiece() {
+        return heldPiece;
+    }
+
     public void generateNewPiece() {
         for (Block b: currentPiece.getShape()) {
             allBlocks.add(b);
@@ -30,6 +38,42 @@ public class Board {
 
         currentPiece = ShapeInitializer.getRandomPiece(5);
         clearRow(checkRowFull());
+    }
+
+    public void holdPiece() {
+
+        // Doesn't swap if the pieces are the same
+        if (heldPiece != null) {
+            if (heldPiece.getClass().getSimpleName().equals(currentPiece.getClass().getSimpleName())) {
+                System.out.println("Not swapping pieces, they're the same!");
+                return;
+            }
+        }
+
+        if (heldPiece == null) {
+            System.out.println("piece is null, generating a new piece!");
+            heldPiece = currentPiece;
+            currentPiece = ShapeInitializer.getRandomPiece(5);
+        } else {
+            System.out.println("Swapping pieces between held and current");
+            Piece temp = currentPiece;
+            currentPiece = heldPiece;
+            heldPiece = temp;
+        }
+        System.out.println("current coordinates: " + currentPiece.getLowestPoints().get(0));
+        // TODO: Make it so that the piece, when swapped, starts at the top
+
+        // int idealYValue = currentPiece.getClass().getSimpleName().equals("IBlock") ? -3 : -2;
+        // System.out.println(currentPiece.getLowestPoints().get(0).getY());
+        // currentPiece.changeY(currentPiece.getLowestPoints().get(0).getY() + idealYValue);
+    }
+
+    public void shiftPieces() {
+        // currentPiece = upcomingPieces[0];
+        // upcomingPieces[0] = upcomingPieces[1];
+        // upcomingPieces[1] = upcomingPieces[2];
+        // upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+        // currentPiece = ShapeInitializer.getRandomPiece(5);
     }
 
     /**
