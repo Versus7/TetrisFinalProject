@@ -11,6 +11,8 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     InfoPanel info;
     Timer timer;
     boolean inFocus = true;
+    
+    double speed = 1000;
 
     public TetrisWindowListener(TetrisWindowPanel panel, ScorePanel score, InfoPanel info) {
         this.panel = panel;
@@ -19,7 +21,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
         panel.addKeyListener(this);
         panel.addFocusListener(this);
-        timer = new Timer(1000, this);
+        timer = new Timer((int)(speed), this);
         timer.start();
     }
 
@@ -54,9 +56,11 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
             default:
                 break;
         }
-       panel.repaint();
-       score.repaint(); 
-       info.repaint();
+        speed = Math.pow((0.8-((double)panel.getBoard().getStats().getLevel()-1.0)*0.007), (double)(panel.getBoard().getStats().getLevel())-1.0) * 1000;
+        timer.setDelay((int)speed);
+        panel.repaint();
+        score.repaint(); 
+        info.repaint();
     }
 
     @Override
