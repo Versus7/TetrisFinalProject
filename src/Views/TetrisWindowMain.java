@@ -11,7 +11,7 @@ public class TetrisWindowMain {
         everything.setLayout(new BorderLayout());
 
         TetrisWindowPanel game = new TetrisWindowPanel();
-        ScorePanel score = new ScorePanel();
+        ScorePanel score = new ScorePanel(game);
         new TetrisWindowListener(game, score);
         
         everything.add(game, BorderLayout.CENTER);
@@ -19,7 +19,7 @@ public class TetrisWindowMain {
 
         // JFrame configuration
         window.setContentPane(everything);
-        window.setSize(200, 400);
+        window.setSize(500, 1000);
         window.setLocation(500, 200);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);

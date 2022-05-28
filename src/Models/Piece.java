@@ -16,6 +16,10 @@ public abstract class Piece {
         return shape;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
     public boolean containsPoint(Coordinate c) {
         for (Block b: shape) {
             if (b.getCoords().getX() == c.getX() && b.getCoords().getY() == c.getY()) {

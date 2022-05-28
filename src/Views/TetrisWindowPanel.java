@@ -5,6 +5,7 @@ import javax.swing.*;
 // file imports
 import Models.Board;
 import Models.Piece;
+import Models.Block;
 
 public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();
@@ -34,8 +35,8 @@ public class TetrisWindowPanel extends JPanel {
         g.drawRect(0, 0, (int)(SQUAREWIDTH*10), (int)(SQUAREWIDTH*20));
 
         board.getCurrentPiece().draw(g);
-        for (Piece p: board.getAllPieces()) {
-            p.draw(g);
+        for (Block b: board.getAllBlocks()) {
+            b.draw(g);
         }
     }
 

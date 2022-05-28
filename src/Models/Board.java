@@ -2,14 +2,17 @@ package Models;
 import java.util.ArrayList;
 
 public class Board {
-    private ArrayList<Piece> allPieces = new ArrayList<Piece>();
+    /**
+     * consider switching to a 2D array
+     */
+    private ArrayList<Block> allBlocks = new ArrayList<Block>();
     private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
     private int linesCleared = 0;
 
     public Board() {}
 
-    public ArrayList<Piece> getAllPieces() {
-        return allPieces;
+    public ArrayList<Block> getAllBlocks() {
+        return allBlocks;
     }
 
     public Piece getCurrentPiece() {
@@ -21,7 +24,10 @@ public class Board {
     }
 
     public void generateNewPiece() {
-        allPieces.add(currentPiece);
+        for (Block b: currentPiece.getShape()) {
+            allBlocks.add(b);
+        }
+
         currentPiece = ShapeInitializer.getRandomPiece(5);
         clearRow(checkRowFull());
     }
@@ -36,16 +42,18 @@ public class Board {
 
         for (int row: rowsToClear) {
             // remove rows
-            for (int i = 0; i < getAllPieces().size(); i++) {
-                if (getAllPieces().get(i).removeInRow(row)) {
-                    getAllPieces().remove(i);
+            for (int i = 0; i < allBlocks.size(); i++) {
+                if (allBlocks.get(i).getCoords().getY() == row) {
+                    System.out.println("removing block number: " + i);
+                    allBlocks.remove(i);
                     i--;
                 }
             }
             
-            for (int j = 0; j < getAllPieces().size(); j++) {
-                if (getAllPieces().get(j).getLowestPoints().get(0).getY() < row) {
-                    movePieceDown(getAllPieces().get(j));
+            for (int j = 0; j < allBlocks.size(); j++) {
+                if (allBlocks.get(j).getCoords().getY() < row) {
+                    System.out.println("Moving block " + j + " down");
+                    moveBlockDown(allBlocks.get(j));
                 }
             }
         }
@@ -74,32 +82,18 @@ public class Board {
     }
 
     public boolean containsPoint(Coordinate c) {
-        for (Piece p: allPieces) {
-            if (p.containsPoint(c)) {
+        for (Block b: allBlocks) {
+            if (b.getCoords().getX() == c.getX() && b.getCoords().getY() == c.getY()) {
                 return true;
             }
         }
         return false;
     }
     
-    // this overridden method of containsPoint checks the points of everything except the piece passed in
-    public boolean containsPoint(Coordinate c, Piece p) {
-        for (Piece piece: allPieces) {
-            if (piece == p) {
-                continue;
-            }
-
-            if (piece.containsPoint(c)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean movePieceDown(Piece a) {
         for (Block b: a.getShape()) {
             Coordinate c = b.getCoords();
-            if (containsPoint(new Coordinate(c.getX(), c.getY() + 1), a) || c.getY() == 19) {
+            if (containsPoint(new Coordinate(c.getX(), c.getY() + 1)) || c.getY() == 19) {
                 generateNewPiece();
                 return true;
             }
@@ -108,6 +102,13 @@ public class Board {
         a.changeY(1);
 
         return false;
+    }
+
+    public void moveBlockDown(Block b) {
+        if (containsPoint(new Coordinate(b.getCoords().getX(), b.getCoords().getY() + 1)) || b.getCoords().getY() == 19) {
+            return;
+        }
+        b.changeY(1);
     }
 
     public void movePieceRight() {

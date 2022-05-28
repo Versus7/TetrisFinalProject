@@ -5,15 +5,20 @@ import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import Models.Board;
 
 public class ScorePanel extends JPanel {
     private int score;
     private int level;
     private JTextPane scoreLabel;
     private JTextPane levelLabel;
+    
+    private TetrisWindowPanel game;
 
 
-    public ScorePanel() {
+    public ScorePanel(TetrisWindowPanel game) {
+        this.game = game;
+
         score = 0;
         level = 1;
 
@@ -77,6 +82,8 @@ public class ScorePanel extends JPanel {
         g.setFont(new Font("System", Font.BOLD, 20));
 
         scoreLabel.setText(score + "");
+        // TODO: Refine scoreLabel to ensure readability under any background color
+        scoreLabel.setBackground(game.getBoard().getCurrentPiece().getColor());
         levelLabel.setText("Level " + level);
     }
     
