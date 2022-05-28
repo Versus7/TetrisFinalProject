@@ -92,4 +92,25 @@ public class ShapeInitializer {
                 return null;
         }
     }
+
+    public static Piece parsePiece(String s) {
+        switch (s) {
+            case "IBlock":
+                return new IBlock(5);
+            case "LeftL":
+                return new LeftL(5);
+            case "LSnakeBlock":
+                return new LSnakeBlock(5);
+            case "RightL":
+                return new RightL(5);
+            case "RSnakeBlock":
+                return new RSnakeBlock(5);
+            case "SquareBlock":
+                return new SquareBlock(5);
+            case "TBlock":
+                return new TBlock(5);
+            default:
+                return null;
+        }
+    }
 }

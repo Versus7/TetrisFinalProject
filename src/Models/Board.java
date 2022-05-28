@@ -13,7 +13,11 @@ public class Board {
 
     private Stats stats = new Stats();
 
-    public Board() {}
+    public Board() {
+        upcomingPieces[0] = ShapeInitializer.getRandomPiece(5);
+        upcomingPieces[1] = ShapeInitializer.getRandomPiece(5);
+        upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+    }
 
     public ArrayList<Block> getAllBlocks() {
         return allBlocks;
@@ -31,12 +35,23 @@ public class Board {
         return heldPiece;
     }
 
+    public Piece[] getUpcomingPieces() {
+        return upcomingPieces;
+    }
+
     public void generateNewPiece() {
         for (Block b: currentPiece.getShape()) {
             allBlocks.add(b);
         }
 
-        currentPiece = ShapeInitializer.getRandomPiece(5);
+        int idealYValue = currentPiece.getClass().getSimpleName().equals("IBlock") ? -3 : -2;
+        currentPiece = ShapeInitializer.parsePiece(upcomingPieces[0].getClass().getSimpleName());
+        currentPiece.changeY(-1*currentPiece.getCenterPoint().getY()+idealYValue+1);
+
+        upcomingPieces[0] = ShapeInitializer.parsePiece(upcomingPieces[1].getClass().getSimpleName());
+        upcomingPieces[1] = ShapeInitializer.parsePiece(upcomingPieces[2].getClass().getSimpleName());
+        upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+
         clearRow(checkRowFull());
     }
 

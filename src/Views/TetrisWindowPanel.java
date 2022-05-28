@@ -8,7 +8,7 @@ import Models.Block;
 
 public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();
-    public static Double SQUAREWIDTH;
+    public static Double SQUAREWIDTH = 10.0;
 
     public TetrisWindowPanel() {
         JPanel everything = new JPanel();
