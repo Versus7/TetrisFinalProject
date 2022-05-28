@@ -46,30 +46,34 @@ public class InfoPanel extends JPanel {
             while (heldPiece.getCenterPoint().getY() > 2) {
                 heldPiece.changeY(-1);
             }
-            heldPiece.draw(g2);
+
+            while (heldPiece.getCenterPoint().getY() < 2) {
+                heldPiece.changeY(1);
+            }
+            heldPiece.draw(g);
         }
 
         // The following code deals with the "Upcoming" blocks.
         // Colors the boxes as the same color as the current piece
         Piece second = game.getBoard().getUpcomingPieces()[0];
 
-        g2.setColor(second.getColor());
-        g2.drawRoundRect(startX, (int)(8*x), squareSideLength, squareSideLength, 10, 10);
+        g.setColor(second.getColor());
+        g.drawRoundRect(startX, (int)(8*x), squareSideLength, squareSideLength, 10, 10);
 
         while (second.getCenterPoint().getX() > 1) {
             second.changeX(-1);
         }
-        while (second.getCenterPoint().getY() < 7) {
+        while (second.getCenterPoint().getY() < 8) {
             second.changeY(1);
         }
-        second.draw(g2);
+        second.draw(g);
 
 
         // Third piece in the row
         Piece third = game.getBoard().getUpcomingPieces()[1];
 
-        g2.setColor(third.getColor());
-        g2.drawRoundRect(startX, (int)(13*x), squareSideLength, squareSideLength, 10, 10);
+        g.setColor(third.getColor());
+        g.drawRoundRect(startX, (int)(13*x), squareSideLength, squareSideLength, 10, 10);
 
         while (third.getCenterPoint().getX() > 1) {
             third.changeX(-1);
@@ -77,13 +81,13 @@ public class InfoPanel extends JPanel {
         while (third.getCenterPoint().getY() < 12) {
             third.changeY(1);
         }
-        third.draw(g2);
+        third.draw(g);
 
         // Fourth piece in the row
         Piece fourth = game.getBoard().getUpcomingPieces()[2];
 
-        g2.setColor(fourth.getColor());
-        g2.drawRoundRect(startX, (int)(18*x), squareSideLength, squareSideLength, 10, 10);
+        g.setColor(fourth.getColor());
+        g.drawRoundRect(startX, (int)(18*x), squareSideLength, squareSideLength, 10, 10);
 
         while (fourth.getCenterPoint().getX() > 1) {
             fourth.changeX(-1);
@@ -91,7 +95,7 @@ public class InfoPanel extends JPanel {
         while (fourth.getCenterPoint().getY() < 17) {
             fourth.changeY(1);
         }
-        fourth.draw(g2);
+        fourth.draw(g);
 
         // System.out.println();
         // System.out.println();

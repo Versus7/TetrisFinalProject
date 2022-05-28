@@ -27,7 +27,7 @@ public class ScorePanel extends JPanel {
         scoreLabel.setEditable(false);
         scoreLabel.setBackground(Color.black);
         scoreLabel.setForeground(Color.white);
-        scoreLabel.setFont(new Font("System", Font.PLAIN, 20));
+        scoreLabel.setFont(new Font("System", Font.PLAIN, 30));
         
         // center the text in scoreLabel
         StyledDocument doc = scoreLabel.getStyledDocument();
@@ -44,7 +44,7 @@ public class ScorePanel extends JPanel {
         levelLabel.setEditable(false);
         levelLabel.setBackground(Color.black);
         levelLabel.setForeground(Color.white);
-        levelLabel.setFont(new Font("System", Font.PLAIN, 10));
+        levelLabel.setFont(new Font("System", Font.PLAIN, 20));
         add(levelLabel);
 
         // center text in levelLabel
