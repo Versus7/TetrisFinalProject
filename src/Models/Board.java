@@ -42,20 +42,24 @@ public class Board {
 
         for (int row: rowsToClear) {
             // remove rows
+            int blocksRemoved = 0;
             for (int i = 0; i < allBlocks.size(); i++) {
                 if (allBlocks.get(i).getCoords().getY() == row) {
-                    System.out.println("removing block number: " + i);
+                    // System.out.println("removing block number: " + i);
                     allBlocks.remove(i);
                     i--;
+                    blocksRemoved++;
+                }
+            }
+            System.out.println("blocks removed: " + blocksRemoved);
+
+            // shift all blocks down using moveBLock method
+            for (int i = 0; i < allBlocks.size(); i++) {
+                if (allBlocks.get(i).getCoords().getY() < row) {
+                    allBlocks.get(i).changeY(1);
                 }
             }
             
-            for (int j = 0; j < allBlocks.size(); j++) {
-                if (allBlocks.get(j).getCoords().getY() < row) {
-                    System.out.println("Moving block " + j + " down");
-                    moveBlockDown(allBlocks.get(j));
-                }
-            }
         }
     }
 
