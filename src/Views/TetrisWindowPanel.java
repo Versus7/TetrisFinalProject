@@ -6,6 +6,10 @@ import javax.swing.*;
 import Models.Board;
 import Models.Block;
 
+/**
+ * Credit for Ghost Piece's opacity: https://stackoverflow.com/questions/11552092/changing-image-opacity
+ */
+
 public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();
     public static Double SQUAREWIDTH = 10.0;
@@ -31,15 +35,20 @@ public class TetrisWindowPanel extends JPanel {
 
         board.getCurrentPiece().draw(g2);
 
-        // Dealing with the ghost piece at the bottom
-        board.redrawGhost();
-        board.getGhostPiece().draw(g2);
-        // System.out.println("Redrawing ghost!");
-
         // Drawing the whole board
         for (Block b: board.getAllBlocks()) {
             b.draw(g2);
         }
+
+
+        // Dealing with the ghost piece at the bottom
+        // See credit given above for the following 2 lines of code
+        float opacity = 0.75f;
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+
+        board.redrawGhost();
+        board.getGhostPiece().draw(g2);
+
     }
 
     public Board getBoard() {
