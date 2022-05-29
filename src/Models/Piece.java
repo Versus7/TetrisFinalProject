@@ -166,12 +166,27 @@ public abstract class Piece {
         rotatedAngle += 90;
         changeY(1);
         changeX(1);
+
+        if (getRightmostCoordinate() > 8) {
+            changeX(-1*(getRightmostCoordinate() - 9));
+        }
+
+        if (getRightmostCoordinate() == 8) {
+            changeX(1);
+        }
     }
 
     public void rotateLeft() {
-        // System.out.println("Rotating left!");
         rotate(-90);
         rotatedAngle -= 90;
+
+        if (getLeftmostCoordinate() < 0) {
+            changeX(1-getLeftmostCoordinate());
+        }
+
+        if (getLeftmostCoordinate() == 1) {
+            changeX(-1);
+        }
     }
 
     public void draw(Graphics g) {
