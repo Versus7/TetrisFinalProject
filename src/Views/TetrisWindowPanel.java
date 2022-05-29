@@ -57,7 +57,8 @@ public class TetrisWindowPanel extends JPanel {
         return board;
     }
 
-    public void endGame() {
+    // returns true if the user wants to play again
+    public boolean endGame() {
         System.out.println("End game fucntion from TetrisWindowPanel");
         
         if(leaderboard.checkScore(board.getStats().getScore())) {
@@ -71,5 +72,20 @@ public class TetrisWindowPanel extends JPanel {
         }
 
         JOptionPane.showMessageDialog(this, leaderboard.getRankings(), "Leaderboard", JOptionPane.PLAIN_MESSAGE);
+
+        // The following 2 lines of code were modified from the Oracle documentation for the JOptionPane class
+        // https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html#create
+        Object[] options = {"Play Again", "Quit Game"};
+        // int n = JOptionPane.showConfirmDialog(this, "Play again? ", "Another round", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int n = JOptionPane.showOptionDialog(this,"Play Again?","Another round", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        System.out.println(n);
+
+        if (n == 0) {
+            board = new Board();
+            return true;
+        } else {
+            System.exit(0);
+            return false;
+        }
     }
 }

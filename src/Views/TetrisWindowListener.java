@@ -104,7 +104,13 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
             panel.removeKeyListener(this);
             panel.removeFocusListener(this);
             System.out.println("Game over!");
-            panel.endGame();
+
+            if (panel.endGame()) {
+
+                timer.restart();
+                panel.addKeyListener(this);
+                panel.addFocusListener(this);
+            }
         }
 
         panel.repaint();
