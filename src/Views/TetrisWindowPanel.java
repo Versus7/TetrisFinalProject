@@ -4,6 +4,7 @@ import javax.swing.*;
 
 // file imports
 import Models.Board;
+import Models.Leaderboard;
 import Models.Block;
 
 /**
@@ -13,6 +14,7 @@ import Models.Block;
 public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();
     public static Double SQUAREWIDTH = 10.0;
+    private Leaderboard leaderboard = new Leaderboard();
 
     public TetrisWindowPanel() {
         JPanel everything = new JPanel();
@@ -53,5 +55,21 @@ public class TetrisWindowPanel extends JPanel {
 
     public Board getBoard() {
         return board;
+    }
+
+    public void endGame() {
+        System.out.println("End game fucntion from TetrisWindowPanel");
+        
+        if(leaderboard.checkScore(board.getStats().getScore())) {
+            String s = JOptionPane.showInputDialog(this, "New high score! Enter your initials: ", "New High Score", JOptionPane.INFORMATION_MESSAGE);
+
+            if (s.length() > 3) {
+                s = s.substring(0, 3);
+            }
+            leaderboard.addScore(s.toUpperCase(), board.getStats().getScore());
+
+        }
+
+        JOptionPane.showMessageDialog(this, leaderboard.getRankings(), "Leaderboard", JOptionPane.PLAIN_MESSAGE);
     }
 }

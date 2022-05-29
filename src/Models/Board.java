@@ -11,6 +11,7 @@ public class Board {
     private Piece heldPiece;
     private Piece[] upcomingPieces = new Piece[3];
     private Piece ghostPiece = ShapeInitializer.parsePiece(currentPiece.getClass().getSimpleName());
+    private boolean gameOver = false;
 
     private Stats stats = new Stats();
 
@@ -49,6 +50,10 @@ public class Board {
     public void generateNewPiece() {
         for (Block b: currentPiece.getShape()) {
             allBlocks.add(b);
+
+            if (b.getCoords().getY() <= 0) {
+                gameOver = true;
+            }
         }
 
         int idealYValue = currentPiece.getClass().getSimpleName().equals("IBlock") ? -3 : -2;
@@ -60,6 +65,10 @@ public class Board {
         upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
 
         clearRow(checkRowFull());
+    }
+
+    public boolean gameStatus() {
+        return gameOver;
     }
 
     public void holdPiece() {

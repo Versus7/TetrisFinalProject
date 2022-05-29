@@ -56,9 +56,8 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
         }
         speed = Math.pow((0.8-((double)panel.getBoard().getStats().getLevel()-1.0)*0.007), (double)(panel.getBoard().getStats().getLevel())-1.0) * 1000;
         timer.setDelay((int)speed);
-        panel.repaint();
-        score.repaint(); 
-        info.repaint();
+
+        updateEverything();
     }
 
     @Override
@@ -83,9 +82,9 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     public void actionPerformed(ActionEvent e) {
         if (inFocus) {
             panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
-            panel.repaint();       
-            score.repaint();
-            info.repaint();     
+            updateEverything();
+
+            System.out.println(panel.getBoard().getCurrentPiece().getShape().toString());
         }
     }
 
@@ -97,6 +96,20 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     @Override
     public void focusLost(FocusEvent e) {
         inFocus = false;
+    }
+
+    public void updateEverything() {
+        if (panel.getBoard().gameStatus()) {
+            timer.stop();
+            panel.removeKeyListener(this);
+            panel.removeFocusListener(this);
+            System.out.println("Game over!");
+            panel.endGame();
+        }
+
+        panel.repaint();
+        score.repaint();
+        info.repaint();
     }
 
 }
