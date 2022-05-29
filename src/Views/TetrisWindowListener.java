@@ -80,8 +80,6 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
         if (inFocus) {
             panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
             updateEverything();
-
-            System.out.println(panel.getBoard().getCurrentPiece().getShape().toString());
         }
     }
 
@@ -100,10 +98,8 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
             timer.stop();
             panel.removeKeyListener(this);
             panel.removeFocusListener(this);
-            System.out.println("Game over!");
 
             if (panel.endGame()) {
-
                 timer.restart();
                 panel.addKeyListener(this);
                 panel.addFocusListener(this);
