@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public abstract class Piece {
     private ArrayList<Block> shape = new ArrayList<Block>();
     private Color color;
+    private int rotatedAngle = 0;
 
     public Piece(shapeType t, int x, int y) {
         ShapeInitializer.makeShape(t, x, y, shape);
@@ -22,6 +23,10 @@ public abstract class Piece {
 
     public Color getColor() {
         return color;
+    }
+
+    public int getRotatedAngle() {
+        return rotatedAngle;
     }
 
     public boolean containsPoint(Coordinate c) {
@@ -113,7 +118,9 @@ public abstract class Piece {
         return new Coordinate(avgX / 4, avgY / 4);
     }
     
-    private void rotate(double d) {
+    public void rotate(double d) {
+        rotatedAngle += d;
+        
         Coordinate center = getCenterPoint();
         double centerX = center.getX();
         double centerY = center.getY();
@@ -124,10 +131,14 @@ public abstract class Piece {
             double originalX = getShape().get(i).getCoords().getX();
             double originalY = getShape().get(i).getCoords().getY();
 
-            double calculatedX = originalX*Math.cos(degrees)-originalY*Math.sin(degrees) + 
-            centerX - (centerX*Math.cos(degrees)-centerY*Math.sin(degrees));
-            double calculatedY = originalX*Math.sin(degrees)+originalY*Math.cos(degrees) +
-            centerY - (centerX*Math.sin(degrees)+centerY*Math.cos(degrees));
+            // double calculatedX = originalX*Math.cos(degrees)-originalY*Math.sin(degrees) + 
+            // centerX - (centerX*Math.cos(degrees)-centerY*Math.sin(degrees));
+            // double calculatedY = originalX*Math.sin(degrees)+originalY*Math.cos(degrees) +
+            // centerY - (centerX*Math.sin(degrees)+centerY*Math.cos(degrees));
+            double calculatedX = originalX * Math.cos(degrees) - originalY * Math.sin(degrees);
+            double calculatedY = originalX * Math.sin(degrees) + originalY * Math.cos(degrees);
+
+
 
             // System.out.println("New x (double): " + calculatedX);
             // System.out.println("New y (double): " + calculatedY);
@@ -146,17 +157,23 @@ public abstract class Piece {
             // System.out.println();
 
         }
+
+        changeX((int)Math.floor(centerX - getCenterPoint().getX()));
+        changeY((int)Math.ceil(centerY - getCenterPoint().getY()));
     }
 
     public void rotateRight() {
         // System.out.println("Rotating right!");
         rotate(90);
+        rotatedAngle += 90;
         changeY(1);
+        changeX(1);
     }
 
     public void rotateLeft() {
         // System.out.println("Rotating left!");
         rotate(-90);
+        rotatedAngle -= 90;
     }
 
     public void draw(Graphics g) {

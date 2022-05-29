@@ -10,6 +10,7 @@ public class Board {
     
     private Piece heldPiece;
     private Piece[] upcomingPieces = new Piece[3];
+    private Piece ghostPiece = ShapeInitializer.parsePiece(currentPiece.getClass().getSimpleName());
 
     private Stats stats = new Stats();
 
@@ -17,6 +18,8 @@ public class Board {
         upcomingPieces[0] = ShapeInitializer.getRandomPiece(5);
         upcomingPieces[1] = ShapeInitializer.getRandomPiece(5);
         upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+
+        ghostPiece.changeY(10);
     }
 
     public ArrayList<Block> getAllBlocks() {
@@ -37,6 +40,10 @@ public class Board {
 
     public Piece[] getUpcomingPieces() {
         return upcomingPieces;
+    }
+
+    public Piece getGhostPiece() {
+        return ghostPiece;
     }
 
     public void generateNewPiece() {
@@ -81,14 +88,6 @@ public class Board {
         // int idealYValue = currentPiece.getClass().getSimpleName().equals("IBlock") ? -3 : -2;
         // System.out.println(currentPiece.getLowestPoints().get(0).getY());
         // currentPiece.changeY(currentPiece.getLowestPoints().get(0).getY() + idealYValue);
-    }
-
-    public void shiftPieces() {
-        // currentPiece = upcomingPieces[0];
-        // upcomingPieces[0] = upcomingPieces[1];
-        // upcomingPieces[1] = upcomingPieces[2];
-        // upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
-        // currentPiece = ShapeInitializer.getRandomPiece(5);
     }
 
     /**
@@ -174,6 +173,37 @@ public class Board {
         a.changeY(1);
 
         return false;
+    }
+
+    public void dropPieceCompletely(Piece a) {
+        while (true) {
+            for (Block b: a.getShape()) {
+                Coordinate c = b.getCoords();
+                if (containsPoint(new Coordinate(c.getX(), c.getY() + 1)) || c.getY() == 19) {
+                    return;
+                }
+            }
+
+            a.changeY(1);
+        }
+    }
+
+    public void redrawGhost() {
+        ghostPiece = ShapeInitializer.parsePiece(getCurrentPiece().getClass().getSimpleName());
+        // System.out.println(getCurrentPiece().getClass().getSimpleName());
+
+        while (getCurrentPiece().getRotatedAngle() > ghostPiece.getRotatedAngle()) {
+            ghostPiece.rotateRight();
+            // System.out.println(getCurrentPiece().getRotatedAngle() + " > " + ghostPiece.getRotatedAngle());
+        }
+
+        while (getCurrentPiece().getRotatedAngle() < ghostPiece.getRotatedAngle()) {
+            ghostPiece.rotateLeft();
+            // System.out.println(getCurrentPiece().getRotatedAngle() + " < " + ghostPiece.getRotatedAngle());
+        }
+        ghostPiece.changeX(getCurrentPiece().getLeftmostCoordinate() - ghostPiece.getLeftmostCoordinate());
+        // System.out.println("current rotated angle: " + getCurrentPiece().getRotatedAngle());
+        dropPieceCompletely(ghostPiece);
     }
 
     /**

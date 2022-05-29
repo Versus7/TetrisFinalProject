@@ -46,10 +46,8 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
                 panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
                 break;
             case 32:
-                Piece temp = panel.getBoard().getCurrentPiece();
-                while (temp == panel.getBoard().getCurrentPiece()) {
-                    panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
-                }
+                panel.getBoard().dropPieceCompletely(panel.getBoard().getCurrentPiece());
+                panel.getBoard().generateNewPiece();
                 break;
             case 72: // hold pieces
                 panel.getBoard().holdPiece();
@@ -68,9 +66,14 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
         switch (e.getKeyCode()) {
             case 70:
                 panel.getBoard().getCurrentPiece().rotateRight();
+                // System.out.println(panel.getBoard().getGhostPiece().getShape().toString());
+                panel.getBoard().getGhostPiece().rotateRight();
+                // System.out.println(panel.getBoard().getGhostPiece().getShape().toString());
+                // System.out.println();
                 break;
             case 81:
                 panel.getBoard().getCurrentPiece().rotateLeft();
+                panel.getBoard().getGhostPiece().rotateLeft();
                 break;
             default:
                 break;

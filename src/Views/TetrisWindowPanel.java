@@ -29,24 +29,14 @@ public class TetrisWindowPanel extends JPanel {
         SQUAREWIDTH = (double)(getHeight()) / 20.0;
         g2.drawRect(0, 0, (int)(SQUAREWIDTH*10.0), (int)(SQUAREWIDTH*20.0));
 
-
-        // g2.setStroke(new BasicStroke((float)0.01));
-        // g2.setColor(Color.white);
-        // // drawing out the tetris grid
-        // for (int i = 0; i < 10; i++) {
-        //     for (int j = 0; j < 20; j++) {
-        //         g.drawRect((int)(i*SQUAREWIDTH), (int)(j*SQUAREWIDTH), SQUAREWIDTH.intValue(), SQUAREWIDTH.intValue());
-        //         // g.drawString(i + ", " + j, i*SQUAREWIDTH, j*SQUAREWIDTH);
-        //     }
-        // }
-
-        // g2.setColor(board.getCurrentPiece().getColor());
-        g2.setStroke(new BasicStroke(2));
-
-        g2.drawLine((int)(board.getCurrentPiece().getLeftmostCoordinate()*SQUAREWIDTH), 0, (int)(board.getCurrentPiece().getLeftmostCoordinate()*SQUAREWIDTH), (int)(SQUAREWIDTH*20.0));
-        g2.drawLine((int)((board.getCurrentPiece().getRightmostCoordinate()+1)*SQUAREWIDTH), 0, (int)((board.getCurrentPiece().getRightmostCoordinate()+1)*SQUAREWIDTH), (int)(SQUAREWIDTH*20.0));
-
         board.getCurrentPiece().draw(g2);
+
+        // Dealing with the ghost piece at the bottom
+        board.redrawGhost();
+        board.getGhostPiece().draw(g2);
+        // System.out.println("Redrawing ghost!");
+
+        // Drawing the whole board
         for (Block b: board.getAllBlocks()) {
             b.draw(g2);
         }
