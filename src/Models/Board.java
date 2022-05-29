@@ -56,6 +56,11 @@ public class Board {
             }
         }
 
+        shiftPieces();
+        clearRow(checkRowFull());
+    }
+
+    public void shiftPieces() {
         int idealYValue = currentPiece.getClass().getSimpleName().equals("IBlock") ? -3 : -2;
         currentPiece = ShapeInitializer.parsePiece(upcomingPieces[0].getClass().getSimpleName());
         currentPiece.changeY(-1*currentPiece.getCenterPoint().getY()+idealYValue+1);
@@ -64,7 +69,6 @@ public class Board {
         upcomingPieces[1] = ShapeInitializer.parsePiece(upcomingPieces[2].getClass().getSimpleName());
         upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
 
-        clearRow(checkRowFull());
     }
 
     public boolean gameStatus() {
@@ -84,7 +88,7 @@ public class Board {
         if (heldPiece == null) {
             System.out.println("piece is null, generating a new piece!");
             heldPiece = currentPiece;
-            currentPiece = ShapeInitializer.getRandomPiece(5);
+            shiftPieces();
         } else {
             System.out.println("Swapping pieces between held and current");
             Piece temp = currentPiece;
