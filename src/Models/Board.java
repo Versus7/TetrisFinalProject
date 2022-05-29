@@ -216,6 +216,7 @@ public class Board {
         }
 
         ghostPiece.changeX(getCurrentPiece().getLeftmostCoordinate() - ghostPiece.getLeftmostCoordinate());
+        ghostPiece.changeY(getCurrentPiece().getCenterPoint().getY()-ghostPiece.getCenterPoint().getY());
         dropPieceCompletely(ghostPiece);
     }
 
