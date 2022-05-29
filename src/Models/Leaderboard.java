@@ -1,7 +1,6 @@
 package Models;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -28,6 +27,7 @@ public class Leaderboard {
                     String[] lineSplit = line.split(",");
                     ranks[i] = new Rank(lineSplit[0], Integer.parseInt(lineSplit[1]));
                 }
+                scanner.close();
             } catch (NoSuchElementException e) {
                 System.out.println("File is empty!");
             }

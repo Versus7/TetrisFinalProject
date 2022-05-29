@@ -2,9 +2,6 @@ package Views;
 import java.awt.event.*;
 import javax.swing.Timer;
 
-// file imports
-import Models.Piece;
-
 public class TetrisWindowListener implements KeyListener, ActionListener, FocusListener {
     TetrisWindowPanel panel;
     ScorePanel score;
