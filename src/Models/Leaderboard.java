@@ -98,7 +98,7 @@ public class Leaderboard {
             if (ranks[i] == null) {
                 break;
             }
-            rankings += (i+1) + "). " + ranks[i].getName() + " " + ranks[i].getScore() + "\n";
+            rankings += (i+1) + "). " + ranks[i].getName() + " " + String.format("%,d", ranks[i].getScore()) + "\n";
 
 
         }
