@@ -119,8 +119,6 @@ public abstract class Piece {
     }
     
     public void rotate(double d) {
-        rotatedAngle += d;
-        
         Coordinate center = getCenterPoint();
         double centerX = center.getX();
         double centerY = center.getY();

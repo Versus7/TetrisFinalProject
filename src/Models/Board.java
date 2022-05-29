@@ -189,20 +189,19 @@ public class Board {
     }
 
     public void redrawGhost() {
-        ghostPiece = ShapeInitializer.parsePiece(getCurrentPiece().getClass().getSimpleName());
-        // System.out.println(getCurrentPiece().getClass().getSimpleName());
-
-        while (getCurrentPiece().getRotatedAngle() > ghostPiece.getRotatedAngle()) {
+        if (!getGhostPiece().getClass().getSimpleName().equals(getCurrentPiece().getClass().getSimpleName())) {
+            ghostPiece = ShapeInitializer.parsePiece(getCurrentPiece().getClass().getSimpleName());
+        } else {
+            ghostPiece.changeY(-20);
+        }
+        
+        if (getCurrentPiece().getRotatedAngle() > ghostPiece.getRotatedAngle()) {
             ghostPiece.rotateRight();
-            // System.out.println(getCurrentPiece().getRotatedAngle() + " > " + ghostPiece.getRotatedAngle());
+        } else if (getCurrentPiece().getRotatedAngle() < ghostPiece.getRotatedAngle()) {
+            ghostPiece.rotateLeft();
         }
 
-        while (getCurrentPiece().getRotatedAngle() < ghostPiece.getRotatedAngle()) {
-            ghostPiece.rotateLeft();
-            // System.out.println(getCurrentPiece().getRotatedAngle() + " < " + ghostPiece.getRotatedAngle());
-        }
         ghostPiece.changeX(getCurrentPiece().getLeftmostCoordinate() - ghostPiece.getLeftmostCoordinate());
-        // System.out.println("current rotated angle: " + getCurrentPiece().getRotatedAngle());
         dropPieceCompletely(ghostPiece);
     }
 
