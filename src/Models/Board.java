@@ -85,15 +85,16 @@ public class Board {
             }
         }
 
-        if (heldPiece == null) {
+        if (heldPiece == null) { // holding pieces for the first time
             System.out.println("piece is null, generating a new piece!");
             heldPiece = currentPiece;
             shiftPieces();
-        } else {
+        } else { // standard holding situation
             System.out.println("Swapping pieces between held and current");
-            Piece temp = currentPiece;
-            currentPiece = heldPiece;
-            heldPiece = temp;
+            String currentName = currentPiece.getClass().getSimpleName();
+            String heldName = heldPiece.getClass().getSimpleName();
+            currentPiece = ShapeInitializer.parsePiece(heldName);
+            heldPiece = ShapeInitializer.parsePiece(currentName);
         }
         System.out.println("current coordinates: " + currentPiece.getLowestPoints().get(0));
         // TODO: Make it so that the piece, when swapped, starts at the top
