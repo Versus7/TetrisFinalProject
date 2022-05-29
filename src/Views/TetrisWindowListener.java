@@ -61,10 +61,10 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case 70:
-                panel.getBoard().getCurrentPiece().rotateRight();
+                panel.getBoard().rotatePieceRight();
                 break;
             case 81:
-                panel.getBoard().getCurrentPiece().rotateLeft();
+                panel.getBoard().rotatePieceLeft();
                 break;
             default:
                 break;

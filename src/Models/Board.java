@@ -76,32 +76,22 @@ public class Board {
     }
 
     public void holdPiece() {
-
-        // Doesn't swap if the pieces are the same
-        if (heldPiece != null) {
-            if (heldPiece.getClass().getSimpleName().equals(currentPiece.getClass().getSimpleName())) {
-                System.out.println("Not swapping pieces, they're the same!");
-                return;
-            }
-        }
-
         if (heldPiece == null) { // holding pieces for the first time
-            System.out.println("piece is null, generating a new piece!");
             heldPiece = currentPiece;
             shiftPieces();
-        } else { // standard holding situation
-            System.out.println("Swapping pieces between held and current");
-            String currentName = currentPiece.getClass().getSimpleName();
-            String heldName = heldPiece.getClass().getSimpleName();
-            currentPiece = ShapeInitializer.parsePiece(heldName);
-            heldPiece = ShapeInitializer.parsePiece(currentName);
+            return;
         }
-        System.out.println("current coordinates: " + currentPiece.getLowestPoints().get(0));
-        // TODO: Make it so that the piece, when swapped, starts at the top
+            
+        // Doesn't swap if the pieces are the same
+        if (heldPiece.getClass().getSimpleName().equals(currentPiece.getClass().getSimpleName())) {
+            return;
+        }
 
-        // int idealYValue = currentPiece.getClass().getSimpleName().equals("IBlock") ? -3 : -2;
-        // System.out.println(currentPiece.getLowestPoints().get(0).getY());
-        // currentPiece.changeY(currentPiece.getLowestPoints().get(0).getY() + idealYValue);
+        // Swaps the pieces
+        String currentName = currentPiece.getClass().getSimpleName();
+        String heldName = heldPiece.getClass().getSimpleName();
+        currentPiece = ShapeInitializer.parsePiece(heldName);
+        heldPiece = ShapeInitializer.parsePiece(currentName);
     }
 
     /**
@@ -257,5 +247,23 @@ public class Board {
         }
 
         currentPiece.changeX(-1);
+    }
+
+    public void rotatePieceRight() {
+        currentPiece.rotateRight();
+    }
+
+    // define the isValidPiece method
+    public boolean isValidPiece(Piece p) {
+        for (Block b: p.getShape()) {
+            if (containsPoint(b.getCoords())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void rotatePieceLeft() {
+        currentPiece.rotateLeft();
     }
 }
