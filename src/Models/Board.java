@@ -251,6 +251,11 @@ public class Board {
 
     public void rotatePieceRight() {
         currentPiece.rotateRight();
+        if (!isValidPiece(getCurrentPiece())) {
+            System.out.println("Invalid rotation detected");
+            getCurrentPiece().rotateLeft();
+            getCurrentPiece().changeY(-1);
+        }
     }
 
     // define the isValidPiece method
@@ -265,5 +270,10 @@ public class Board {
 
     public void rotatePieceLeft() {
         currentPiece.rotateLeft();
+        if (!isValidPiece(getCurrentPiece())) {
+            System.out.println("Invalid rotation detected");
+            getCurrentPiece().rotateRight();
+            getCurrentPiece().changeY(-1);
+        }
     }
 }
