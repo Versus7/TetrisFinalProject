@@ -2,11 +2,17 @@ package Views;
 import java.awt.event.*;
 import javax.swing.Timer;
 
+// imports to handle the music
+import java.io.File;
+import javax.sound.sampled.*;
+import java.io.IOException;
+
 public class TetrisWindowListener implements KeyListener, ActionListener, FocusListener {
     TetrisWindowPanel panel;
     ScorePanel score;
     InfoPanel info;
     Timer timer;
+    Clip clip;
     boolean inFocus = true;
     
     double speed = 1000;
@@ -20,6 +26,21 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
         panel.addFocusListener(this);
         timer = new Timer((int)(speed), this);
         timer.start();
+
+        File musicFile = new File(System.getProperty("user.dir") + "/src/TetrisTheme.wav");
+        // // play the music
+        try {
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(musicFile));
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -86,11 +107,20 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     @Override
     public void focusGained(FocusEvent e) {
         inFocus = true;
+
+        if (clip != null) {
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
     }
 
     @Override
     public void focusLost(FocusEvent e) {
         inFocus = false;
+
+        if (clip != null) {
+            clip.stop();
+        }
     }
 
     public void updateEverything() {

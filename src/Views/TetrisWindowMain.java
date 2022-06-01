@@ -3,31 +3,8 @@ package Views;
 import javax.swing.*;
 import java.awt.*;
 
-// imports to handle the music
-import java.io.File;
-import javax.sound.sampled.*;
-import java.io.IOException;
-
 public class TetrisWindowMain {
     public static void main(String[] args) {
-        // music
-        File musicFile = new File(System.getProperty("user.dir") + "/src/TetrisTheme.wav");
-        // play the music
-        try {
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(musicFile));
-            clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        }
-
-
-        // views
         JFrame window = new JFrame("Tetris");
 
         JPanel everything = new JPanel();
