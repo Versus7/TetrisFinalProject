@@ -167,6 +167,18 @@ public abstract class Piece {
         changeY(1);
         changeX(1);
 
+        checkBounds();
+    }
+
+    public void rotateLeft() {
+        rotate(-90);
+        rotatedAngle -= 90;
+
+        checkBounds();
+    }
+
+    public void checkBounds() {
+        // check right side of board
         if (getRightmostCoordinate() > 8) {
             changeX(-1*(getRightmostCoordinate() - 9));
         }
@@ -174,12 +186,8 @@ public abstract class Piece {
         if (getRightmostCoordinate() == 8) {
             changeX(1);
         }
-    }
 
-    public void rotateLeft() {
-        rotate(-90);
-        rotatedAngle -= 90;
-
+        // checking left side of the board
         if (getLeftmostCoordinate() < 0) {
             changeX(1-getLeftmostCoordinate());
         }
