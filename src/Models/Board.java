@@ -20,6 +20,10 @@ public class Board {
         upcomingPieces[1] = ShapeInitializer.getRandomPiece(5);
         upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
 
+        while (upcomingPieces[2].getClass().getSimpleName().equals(upcomingPieces[1].getClass().getSimpleName()) && upcomingPieces[1].getClass().getSimpleName().equals(upcomingPieces[0].getClass().getSimpleName())) {
+            upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+        }
+
         ghostPiece.changeY(10);
     }
 
@@ -69,6 +73,10 @@ public class Board {
         upcomingPieces[1] = ShapeInitializer.parsePiece(upcomingPieces[2].getClass().getSimpleName());
         upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
 
+        // prevents the upcoming from having 3 of the same piece type
+        while (upcomingPieces[2].getClass().getSimpleName().equals(upcomingPieces[1].getClass().getSimpleName()) && upcomingPieces[1].getClass().getSimpleName().equals(upcomingPieces[0].getClass().getSimpleName())) {
+            upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+        }
     }
 
     public boolean gameStatus() {
