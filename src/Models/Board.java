@@ -2,9 +2,6 @@ package Models;
 import java.util.ArrayList;
 
 public class Board {
-    /**
-     * consider switching to a 2D array
-     */
     private ArrayList<Block> allBlocks = new ArrayList<Block>();
     private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
     
@@ -27,6 +24,7 @@ public class Board {
         ghostPiece.changeY(10);
     }
 
+    // Getters
     public ArrayList<Block> getAllBlocks() {
         return allBlocks;
     }
@@ -51,6 +49,12 @@ public class Board {
         return ghostPiece;
     }
 
+    public boolean gameStatus() {
+        return gameOver;
+    }
+
+    // Setters, Other Methods
+
     public void generateNewPiece() {
         for (Block b: currentPiece.getShape()) {
             allBlocks.add(b);
@@ -64,6 +68,10 @@ public class Board {
         clearRow(checkRowFull());
     }
 
+    /*
+     * Method is called when a piece is dropped.
+     * It sets the next piece to the first piece in the "upcoming pieces" list, and shifts the list up.
+     */
     public void shiftPieces() {
         int idealYValue = currentPiece.getClass().getSimpleName().equals("IBlock") ? -3 : -2;
         currentPiece = ShapeInitializer.parsePiece(upcomingPieces[0].getClass().getSimpleName());
@@ -79,9 +87,6 @@ public class Board {
         }
     }
 
-    public boolean gameStatus() {
-        return gameOver;
-    }
 
     public void holdPiece() {
         if (heldPiece == null) { // holding pieces for the first time
@@ -111,8 +116,6 @@ public class Board {
            return;
        }
 
-    //    System.out.println("Rows to clear: " + rowsToClear.toString());
-    //    System.out.println("Size of rows to clear: " + (rowsToClear.size()-1));
        stats.incrementScore(rowsToClear.size());
 
         for (int row: rowsToClear) {
@@ -122,18 +125,16 @@ public class Board {
                     i--;
                 }
             }
-
             for (int i = 0; i < allBlocks.size(); i++) {
                 if (allBlocks.get(i).getCoords().getY() < row) {
                     allBlocks.get(i).changeY(1);
                 }
             }
-            
         }
     }
 
     /**
-     * Method checks every row to see if rows are full
+     * Method checks every row to see if the row is full
      * If a row is full, the row is added to an ArrayList
      * @return ArrayList with indices of rows to remove
      */
@@ -168,6 +169,8 @@ public class Board {
         return false;
     }
     
+    // Methods to move pieces
+
     /**
      * Method checks if the piece can move down
      * @param a piece to move down, if possible
@@ -218,23 +221,7 @@ public class Board {
         dropPieceCompletely(ghostPiece);
     }
 
-    /**
-     * Method moves blocks down if possible
-     * Method is called when a row is to be cleared
-     * It moves all blocks above the row downwards if possible
-     * @param b block to move down
-     */
-    public void moveBlockDown(Block b) {
-        if (containsPoint(new Coordinate(b.getCoords().getX(), b.getCoords().getY() + 1)) || b.getCoords().getY() == 19) {
-            return;
-        }
-        b.changeY(1);
-    }
-
-    /**
-     * The following two methods attempt to move a piece right or left
-     * If there is a piece in the way, or it is reaching the borders of the grid, the piece will not move
-     */
+    // Moving pieces to the side
     public void movePieceRight() {
         for (Block b: currentPiece.getShape()) {
             if (containsPoint(new Coordinate(b.getCoords().getX() + 1, b.getCoords().getY()))
@@ -257,16 +244,7 @@ public class Board {
         currentPiece.changeX(-1);
     }
 
-    public void rotatePieceRight() {
-        currentPiece.rotateRight();
-        if (!isValidPiece(getCurrentPiece())) {
-            System.out.println("Invalid rotation detected");
-            getCurrentPiece().rotateLeft();
-            getCurrentPiece().changeY(-1);
-        }
-    }
-
-    // define the isValidPiece method
+    // Helper method for rotation methods, determines if a rotation is legal or not
     public boolean isValidPiece(Piece p) {
         for (Block b: p.getShape()) {
             if (containsPoint(b.getCoords())) {
@@ -274,6 +252,16 @@ public class Board {
             }
         }
         return true;
+    }
+
+    // Rotation methods
+    public void rotatePieceRight() {
+        currentPiece.rotateRight();
+        if (!isValidPiece(getCurrentPiece())) {
+            System.out.println("Invalid rotation detected");
+            getCurrentPiece().rotateLeft();
+            getCurrentPiece().changeY(-1);
+        }
     }
 
     public void rotatePieceLeft() {

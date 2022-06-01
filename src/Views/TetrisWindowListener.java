@@ -8,14 +8,14 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 
 public class TetrisWindowListener implements KeyListener, ActionListener, FocusListener {
-    TetrisWindowPanel panel;
-    ScorePanel score;
-    InfoPanel info;
-    Timer timer;
-    Clip clip;
-    boolean inFocus = true;
+    private TetrisWindowPanel panel;
+    private ScorePanel score;
+    private InfoPanel info;
+    private Timer timer;
+    private Clip clip;
+    private boolean inFocus = true;
     
-    double speed = 1000;
+    private double speed = 1000;
 
     public TetrisWindowListener(TetrisWindowPanel panel, ScorePanel score, InfoPanel info) {
         this.panel = panel;

@@ -47,7 +47,6 @@ public class Leaderboard {
     }
 
     public void addScore(String name, int score) {
-        // use insertion sort to insert the score passed in into the ranks array, if it is greater than the lowest score
         for (int i = 0; i < ranks.length; i++) {
             if (ranks[i] == null) {
                 ranks[i] = new Rank(name, score);
@@ -92,6 +91,7 @@ public class Leaderboard {
         }
     }
 
+    // Used to print out the leaderboard at the end of the game
     public String getRankings() {
         String rankings = "";
         for (int i = 0; i < 5; i++) {

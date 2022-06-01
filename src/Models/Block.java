@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import Views.TetrisWindowPanel;
 
 public class Block {
-    Coordinate coordinate;
+    private Coordinate coordinate;
     private Color c;
 
     public Block(int x, int y) {

@@ -17,6 +17,7 @@ public abstract class Piece {
         }
     }
 
+    // Getters
     public ArrayList<Block> getShape() {
         return shape;
     }
@@ -27,38 +28,6 @@ public abstract class Piece {
 
     public int getRotatedAngle() {
         return rotatedAngle;
-    }
-
-    public boolean containsPoint(Coordinate c) {
-        for (Block b: shape) {
-            if (b.getCoords().getX() == c.getX() && b.getCoords().getY() == c.getY()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean removeInRow(int row) {
-        // System.out.println("Block shape: " + getShape().toString());
-        for (int i = 0; i < getShape().size(); i++) {
-            if (getShape().get(i).getCoords().getY() == row) {
-                getShape().remove(i);
-                i--;
-            }
-        }
-        return getShape().size() == 0;
-    }
-
-    public void changeX(int amount) {
-        for (int i = 0; i < shape.size(); i++) {
-            shape.get(i).changeX(amount);
-        }
-    }
-
-    public void changeY(int amount) {
-        for (int i = 0; i < shape.size(); i++) {
-            shape.get(i).changeY(amount);
-        }
     }
 
     public ArrayList<Coordinate> getLowestPoints() {
@@ -117,7 +86,31 @@ public abstract class Piece {
         }
         return new Coordinate(avgX / 4, avgY / 4);
     }
-    
+
+    // Setters, Other Methods
+
+    public boolean containsPoint(Coordinate c) {
+        for (Block b: shape) {
+            if (b.getCoords().getX() == c.getX() && b.getCoords().getY() == c.getY()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void changeX(int amount) {
+        for (int i = 0; i < shape.size(); i++) {
+            shape.get(i).changeX(amount);
+        }
+    }
+
+    public void changeY(int amount) {
+        for (int i = 0; i < shape.size(); i++) {
+            shape.get(i).changeY(amount);
+        }
+    }
+
+    // Methods for Rotation
     public void rotate(double d) {
         Coordinate center = getCenterPoint();
         double centerX = center.getX();
@@ -129,19 +122,8 @@ public abstract class Piece {
             double originalX = getShape().get(i).getCoords().getX();
             double originalY = getShape().get(i).getCoords().getY();
 
-            // double calculatedX = originalX*Math.cos(degrees)-originalY*Math.sin(degrees) + 
-            // centerX - (centerX*Math.cos(degrees)-centerY*Math.sin(degrees));
-            // double calculatedY = originalX*Math.sin(degrees)+originalY*Math.cos(degrees) +
-            // centerY - (centerX*Math.sin(degrees)+centerY*Math.cos(degrees));
             double calculatedX = originalX * Math.cos(degrees) - originalY * Math.sin(degrees);
             double calculatedY = originalX * Math.sin(degrees) + originalY * Math.cos(degrees);
-
-
-
-            // System.out.println("New x (double): " + calculatedX);
-            // System.out.println("New y (double): " + calculatedY);
-
-            // System.out.print(getShape().get(i) + " --> ");
 
             getShape().get(i).getCoords().setX(
                 (int)(Math.round(calculatedX))
@@ -150,10 +132,6 @@ public abstract class Piece {
             getShape().get(i).getCoords().setY(
                 (int)(Math.round(calculatedY))
             );
-
-            // System.out.print(getShape().get(i));
-            // System.out.println();
-
         }
 
         changeX((int)Math.floor(centerX - getCenterPoint().getX()));
@@ -161,7 +139,6 @@ public abstract class Piece {
     }
 
     public void rotateRight() {
-        // System.out.println("Rotating right!");
         rotate(90);
         rotatedAngle += 90;
         changeY(1);
@@ -177,6 +154,7 @@ public abstract class Piece {
         checkBounds();
     }
 
+    // This method checks if the piece extends beyond the bounds of the grid. If it does, it will adjust the coordinates accordingly.
     public void checkBounds() {
         // check right side of board
         if (getRightmostCoordinate() > 8) {

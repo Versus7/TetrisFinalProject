@@ -42,7 +42,6 @@ public class TetrisWindowPanel extends JPanel {
             b.draw(g2);
         }
 
-
         // Dealing with the ghost piece at the bottom
         // See credit given above for the following 2 lines of code
         float opacity = 0.3f;

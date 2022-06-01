@@ -9,22 +9,25 @@ public class Coordinate {
         this.y = y;
     }
 
+    // Getters
     public int getX() {
         return x;
-    }
-
-    public void setX(int newX) {
-        x = newX;
     }
 
     public int getY() {
         return y;
     }
 
+    // Setters
+    public void setX(int newX) {
+        x = newX;
+    }
+
     public void setY(int newY) {
         y = newY;
     }
 
+    // Debug to-string method
     public String toString() {
         return "(" + getX() + ", " + getY() + ")";
     }
