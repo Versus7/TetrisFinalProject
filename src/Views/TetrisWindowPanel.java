@@ -45,7 +45,7 @@ public class TetrisWindowPanel extends JPanel {
 
         // Dealing with the ghost piece at the bottom
         // See credit given above for the following 2 lines of code
-        float opacity = 0.75f;
+        float opacity = 0.3f;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
 
         board.redrawGhost();

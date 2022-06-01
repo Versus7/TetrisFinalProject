@@ -33,20 +33,20 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
          * eventually switch system to use arrow keys instead of WASD
          */
         switch (e.getKeyCode()) {
-            case 65:
+            case 37:
                 panel.getBoard().movePieceLeft();
                 break;
-            case 68:
+            case 39:
                 panel.getBoard().movePieceRight();
                 break;
-            case 83:
+            case 40:
                 panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
                 break;
             case 32:
                 panel.getBoard().dropPieceCompletely(panel.getBoard().getCurrentPiece());
                 panel.getBoard().generateNewPiece();
                 break;
-            case 72: // hold pieces
+            case 67: // hold pieces
                 panel.getBoard().holdPiece();
             default:
                 break;
@@ -60,7 +60,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case 70:
+            case 38:
                 panel.getBoard().rotatePieceRight();
                 break;
             case 81:
