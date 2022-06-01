@@ -195,6 +195,11 @@ public abstract class Piece {
         if (getLeftmostCoordinate() == 1) {
             changeX(-1);
         }
+
+        // checking bottom of the board
+        if (getLowestPoints().get(0).getY() > 19) {
+            changeY(-1*(getLowestPoints().get(0).getY() - 19));
+        }
     }
 
     public void draw(Graphics g) {
