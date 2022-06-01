@@ -72,7 +72,7 @@ public class Board {
      * Method is called when a piece is dropped.
      * It sets the next piece to the first piece in the "upcoming pieces" list, and shifts the list up.
      */
-    public void shiftPieces() {
+    private void shiftPieces() {
         int idealYValue = currentPiece.getClass().getSimpleName().equals("IBlock") ? -3 : -2;
         currentPiece = ShapeInitializer.parsePiece(upcomingPieces[0].getClass().getSimpleName());
         currentPiece.changeY(-1*currentPiece.getCenterPoint().getY()+idealYValue+1);
@@ -111,7 +111,7 @@ public class Board {
      * Clears rows that are full, and moves blocks above downwards
      * @param rowsToClear the indices of the rows that are full
      */
-    public void clearRow(ArrayList<Integer> rowsToClear) {
+    private void clearRow(ArrayList<Integer> rowsToClear) {
        if (rowsToClear.size() <= 0) {
            return;
        }
@@ -138,7 +138,7 @@ public class Board {
      * If a row is full, the row is added to an ArrayList
      * @return ArrayList with indices of rows to remove
      */
-    public ArrayList<Integer> checkRowFull() {
+    private ArrayList<Integer> checkRowFull() {
         ArrayList<Integer> rowToClear = new ArrayList<Integer>();
         for (int r = 0; r < 20; r++) {
             int numInRow = 0;
@@ -160,7 +160,7 @@ public class Board {
      * @param c the coordinate to check
      * @return true if the point is occupied, false otherwise
      */
-    public boolean containsPoint(Coordinate c) {
+    private boolean containsPoint(Coordinate c) {
         for (Block b: allBlocks) {
             if (b.getCoords().getX() == c.getX() && b.getCoords().getY() == c.getY()) {
                 return true;
@@ -245,7 +245,7 @@ public class Board {
     }
 
     // Helper method for rotation methods, determines if a rotation is legal or not
-    public boolean isValidPiece(Piece p) {
+    private boolean isValidPiece(Piece p) {
         for (Block b: p.getShape()) {
             if (containsPoint(b.getCoords())) {
                 return false;
