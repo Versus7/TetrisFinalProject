@@ -21,7 +21,7 @@ public class TetrisWindowMain {
 
         // JFrame configuration
         window.setContentPane(everything);
-        window.setSize(1000, 1000);
+        window.setSize(550, 1000);
         window.setLocation(500, 200);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
