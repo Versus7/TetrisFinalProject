@@ -88,6 +88,12 @@ public abstract class Piece {
     }
 
     // Setters, Other Methods
+    public void setShape(ArrayList<Block> s) {
+        shape.clear();
+        for (Block b: s) {
+            shape.add(new Block(b.getCoords().getX(), b.getCoords().getY()));
+        }
+    }
 
     public boolean containsPoint(Coordinate c) {
         for (Block b: shape) {

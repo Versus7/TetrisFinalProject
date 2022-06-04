@@ -256,20 +256,25 @@ public class Board {
 
     // Rotation methods
     public void rotatePieceRight() {
-        currentPiece.rotateRight();
-        if (!isValidPiece(getCurrentPiece())) {
-            System.out.println("Invalid rotation detected");
-            getCurrentPiece().rotateLeft();
-            getCurrentPiece().changeY(-1);
+        Piece temp = ShapeInitializer.parsePiece(currentPiece.getClass().getSimpleName());
+        temp.setShape(currentPiece.getShape());
+
+        temp.rotateRight();
+        if (isValidPiece(temp)) {
+            currentPiece.rotateRight();
+        } else {
+            System.out.println("Invalid rotation");
         }
     }
 
     public void rotatePieceLeft() {
-        currentPiece.rotateLeft();
-        if (!isValidPiece(getCurrentPiece())) {
-            System.out.println("Invalid rotation detected");
-            getCurrentPiece().rotateRight();
-            getCurrentPiece().changeY(-1);
+        Piece temp = ShapeInitializer.parsePiece(currentPiece.getClass().getSimpleName());
+        temp.setShape(currentPiece.getShape());
+        temp.rotateLeft();
+        if (isValidPiece(temp)) {
+            currentPiece.rotateLeft();
+        } else {
+            System.out.println("Invalid rotation");
         }
     }
 }
