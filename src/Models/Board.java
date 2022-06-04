@@ -9,6 +9,7 @@ public class Board {
     private Piece[] upcomingPieces = new Piece[3];
     private Piece ghostPiece = ShapeInitializer.parsePiece(currentPiece.getClass().getSimpleName());
     private boolean gameOver = false;
+    private boolean didHold = false;
 
     private Stats stats = new Stats();
 
@@ -66,6 +67,8 @@ public class Board {
 
         shiftPieces();
         clearRow(checkRowFull());
+        
+        didHold = false;
     }
 
     /*
@@ -89,8 +92,13 @@ public class Board {
 
 
     public void holdPiece() {
+        if (didHold) {
+            return;
+        }
+
         if (heldPiece == null) { // holding pieces for the first time
             heldPiece = currentPiece;
+            didHold = true;
             shiftPieces();
             return;
         }
@@ -105,6 +113,8 @@ public class Board {
         String heldName = heldPiece.getClass().getSimpleName();
         currentPiece = ShapeInitializer.parsePiece(heldName);
         heldPiece = ShapeInitializer.parsePiece(currentName);
+
+        didHold = true;
     }
 
     /**
