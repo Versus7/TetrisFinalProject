@@ -226,6 +226,13 @@ public class Board {
         } else {
             ghostPiece.changeY(-20);
         }
+
+        while (ghostPiece.getRotatedAngle() < currentPiece.getRotatedAngle()) {
+            ghostPiece.rotateRight();
+        }
+        while (ghostPiece.getRotatedAngle() > currentPiece.getRotatedAngle()) {
+            ghostPiece.rotateLeft();
+        }
         
         ghostPiece.changeX(getCurrentPiece().getLeftmostCoordinate() - ghostPiece.getLeftmostCoordinate());
         ghostPiece.changeY(getCurrentPiece().getCenterPoint().getY()-ghostPiece.getCenterPoint().getY());
@@ -273,7 +280,7 @@ public class Board {
         temp.rotateRight();
         if (isValidPiece(temp)) {
             currentPiece.rotateRight();
-            ghostPiece.rotateRight();
+            // ghostPiece.rotateRight();
         }
     }
 
@@ -283,7 +290,7 @@ public class Board {
         temp.rotateLeft();
         if (isValidPiece(temp)) {
             currentPiece.rotateLeft();
-            ghostPiece.rotateLeft();
+            // ghostPiece.rotateLeft();
         }   
     }
 }
