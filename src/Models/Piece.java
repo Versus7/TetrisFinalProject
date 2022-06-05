@@ -77,14 +77,14 @@ public abstract class Piece {
     }
 
     public Coordinate getCenterPoint() {
-        int avgX = 0;
-        int avgY = 0;
+        double avgX = 0;
+        double avgY = 0;
 
         for (Block b: getShape()) {
             avgX += b.getCoords().getX();
             avgY += b.getCoords().getY();
         }
-        return new Coordinate(avgX / 4, avgY / 4);
+        return new Coordinate((int)Math.round(avgX / 4.0), (int)Math.round(avgY / 4.0));
     }
 
     // Setters, Other Methods
@@ -142,21 +142,16 @@ public abstract class Piece {
 
         changeX((int)Math.floor(centerX - getCenterPoint().getX()));
         changeY((int)Math.ceil(centerY - getCenterPoint().getY()));
+        rotatedAngle += d;
     }
 
     public void rotateRight() {
         rotate(90);
-        rotatedAngle += 90;
-        changeY(1);
-        changeX(1);
-
         checkBounds();
     }
 
     public void rotateLeft() {
         rotate(-90);
-        rotatedAngle -= 90;
-
         checkBounds();
     }
 
