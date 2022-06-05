@@ -201,18 +201,24 @@ public class Board {
         return false;
     }
 
-    public void dropPieceCompletely(Piece a) {
+    // Repeats the movePieceDown method until the piece is as far as it goes
+    public void dropPieceCompletely(Piece a, boolean forCurrentPiece) {
+        int distance = 0;
         while (true) {
             for (Block b: a.getShape()) {
                 Coordinate c = b.getCoords();
                 if (containsPoint(new Coordinate(c.getX(), c.getY() + 1)) || c.getY() == 19) {
+                    if (forCurrentPiece) {
+                        stats.hardDrop(distance);
+                    }
                     return;
                 }
             }
 
             a.changeY(1);
+            distance++;
         }
-    }
+     }
 
     public void redrawGhost() {
         if (!getGhostPiece().getClass().getSimpleName().equals(getCurrentPiece().getClass().getSimpleName())) {
@@ -223,7 +229,7 @@ public class Board {
         
         ghostPiece.changeX(getCurrentPiece().getLeftmostCoordinate() - ghostPiece.getLeftmostCoordinate());
         ghostPiece.changeY(getCurrentPiece().getCenterPoint().getY()-ghostPiece.getCenterPoint().getY());
-        dropPieceCompletely(ghostPiece);
+        dropPieceCompletely(ghostPiece, false);
     }
 
     // Moving pieces to the side
@@ -268,8 +274,6 @@ public class Board {
         if (isValidPiece(temp)) {
             currentPiece.rotateRight();
             ghostPiece.rotateRight();
-        } else {
-            System.out.println("Invalid rotation");
         }
     }
 
@@ -280,8 +284,6 @@ public class Board {
         if (isValidPiece(temp)) {
             currentPiece.rotateLeft();
             ghostPiece.rotateLeft();
-        } else {
-            System.out.println("Invalid rotation");
-        }
+        }   
     }
 }

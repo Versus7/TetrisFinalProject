@@ -33,23 +33,27 @@ public class Stats {
         int constant;
         switch (lines) {
             case 1:
-                constant = 40;
-                break;
-            case 2:
                 constant = 100;
                 break;
-            case 3:
+            case 2:
                 constant = 300;
                 break;
+            case 3:
+                constant = 500;
+                break;
             case 4:
-                constant = 1200;
+                constant = 800;
                 break;
             default:
                 constant = 410;
                 break;
         }
 
-        this.score += (constant * (lines + 1));
+        this.score += (constant * lines);
+    }
+
+    public void hardDrop(int distance) {
+        this.score += (distance * 2);
     }
 
     private void incrementLevel(int amount) {
