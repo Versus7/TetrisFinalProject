@@ -26,8 +26,11 @@ public abstract class Piece {
         return color;
     }
 
-    public ArrayList<Coordinate> getLowestPoints() {
-        ArrayList<Coordinate> lowestPieces = new ArrayList<Coordinate>();
+    public int getRotatedAngle() {
+        return rotatedAngle;
+    }
+
+    private int getLowestPoint() {
         int lowest = Integer.MIN_VALUE;
 
         // find the lowest value
@@ -36,18 +39,10 @@ public abstract class Piece {
                 lowest = c.getCoords().getY();
             }
         }
-
-        // add blocks with the lowest value to an arraylist
-        for (Block c: shape) {
-            if (c.getCoords().getY() == lowest) {
-                lowestPieces.add(c.getCoords());
-            }
-        }
-
-        // return the array list
-        return lowestPieces;
+        return lowest;
     }
 
+    // Used by Board to align ghost piece and current piece
     public int getLeftmostCoordinate() {
         int left = Integer.MAX_VALUE;
 
@@ -60,7 +55,7 @@ public abstract class Piece {
         return left;
     }
 
-    public int getRightmostCoordinate() {
+    private int getRightmostCoordinate() {
         int right = Integer.MIN_VALUE;
 
         for (Block b: getShape()) {
@@ -81,10 +76,6 @@ public abstract class Piece {
             avgY += b.getCoords().getY();
         }
         return new Coordinate((int)Math.round(avgX / 4.0), (int)Math.round(avgY / 4.0));
-    }
-
-    public int getRotatedAngle() {
-        return rotatedAngle;
     }
 
     // Setters, Other Methods
@@ -177,8 +168,8 @@ public abstract class Piece {
         }
 
         // checking bottom of the board
-        if (getLowestPoints().get(0).getY() > 19) {
-            changeY(-1*(getLowestPoints().get(0).getY() - 19));
+        if (getLowestPoint() > 19) {
+            changeY(-1*(getLowestPoint() - 19));
         }
     }
 
