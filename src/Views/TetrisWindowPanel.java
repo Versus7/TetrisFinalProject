@@ -33,8 +33,22 @@ public class TetrisWindowPanel extends JPanel {
         g2.setColor(board.getCurrentPiece().getColor());
 
         SQUAREWIDTH = (double)(getHeight()) / 20.0;
-        g2.drawRect(0, 0, (int)(SQUAREWIDTH*10.0), (int)(SQUAREWIDTH*20.0));
 
+        // border
+        g2.drawRect(0, 0, (int)(SQUAREWIDTH*10.0), (int)(SQUAREWIDTH*20.0));
+                // grid
+                g2.setColor(Color.white);
+                g2.setStroke(new BasicStroke(0.5f));
+                for (int i = 0; i < 10; i++) {		        
+                    for (int j = 0; j < 20; j++) {		       
+                        g.drawRect((int)(i*SQUAREWIDTH), (int)(j*SQUAREWIDTH), SQUAREWIDTH.intValue(), SQUAREWIDTH.intValue()); 
+                    }
+                }	
+
+                g2.setStroke(new BasicStroke(4));
+                g2.setColor(board.getCurrentPiece().getColor());
+        
+        // pieces
         board.getCurrentPiece().draw(g2);
 
         // Drawing the whole board
@@ -44,11 +58,13 @@ public class TetrisWindowPanel extends JPanel {
 
         // Dealing with the ghost piece at the bottom
         // See credit given above for the following 2 lines of code
-        float opacity = 0.3f;
+        float opacity = 0.5f;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
 
         board.redrawGhost();
         board.getGhostPiece().draw(g2);
+
+        
 
     }
 
