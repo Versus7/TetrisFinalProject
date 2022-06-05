@@ -8,8 +8,8 @@ public abstract class Piece {
     private Color color;
     private int rotatedAngle = 0;
 
-    public Piece(shapeType t, int x, int y) {
-        ShapeInitializer.makeShape(t, x, y, shape);
+    public Piece(shapeType t, int y) {
+        ShapeInitializer.makeShape(t, y, shape);
         color = ShapeInitializer.switchColor(t);
 
         for (Block b: shape) {

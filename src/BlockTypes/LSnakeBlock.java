@@ -3,7 +3,7 @@ import Models.Piece;
 import Models.shapeType;
 
 public class LSnakeBlock extends Piece {
-    public LSnakeBlock(int x) {
-        super(shapeType.LSNAKE, x, -2);
+    public LSnakeBlock() {
+        super(shapeType.LSNAKE, -2);
     }
 }

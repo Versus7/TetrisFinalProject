@@ -3,7 +3,7 @@ import Models.Piece;
 import Models.shapeType;
 
 public class RSnakeBlock extends Piece {
-    public RSnakeBlock(int x) {
-        super(shapeType.RSNAKE, x, -2);
+    public RSnakeBlock() {
+        super(shapeType.RSNAKE, -2);
     }
 }

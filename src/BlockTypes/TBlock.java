@@ -3,7 +3,7 @@ import Models.Piece;
 import Models.shapeType;
 
 public class TBlock extends Piece {
-    public TBlock(int x) {
-        super(shapeType.PYRAMID, x, -2);
+    public TBlock() {
+        super(shapeType.PYRAMID, -2);
     }
 }

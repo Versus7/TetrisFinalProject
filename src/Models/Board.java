@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Board {
     private ArrayList<Block> allBlocks = new ArrayList<Block>();
-    private Piece currentPiece = ShapeInitializer.getRandomPiece(5);
+    private Piece currentPiece = ShapeInitializer.getRandomPiece();
     
     private Piece heldPiece;
     private Piece[] upcomingPieces = new Piece[3];
@@ -14,12 +14,12 @@ public class Board {
     private Stats stats = new Stats();
 
     public Board() {
-        upcomingPieces[0] = ShapeInitializer.getRandomPiece(5);
-        upcomingPieces[1] = ShapeInitializer.getRandomPiece(5);
-        upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+        upcomingPieces[0] = ShapeInitializer.getRandomPiece();
+        upcomingPieces[1] = ShapeInitializer.getRandomPiece();
+        upcomingPieces[2] = ShapeInitializer.getRandomPiece();
 
         while (upcomingPieces[2].getClass().getSimpleName().equals(upcomingPieces[1].getClass().getSimpleName()) && upcomingPieces[1].getClass().getSimpleName().equals(upcomingPieces[0].getClass().getSimpleName())) {
-            upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+            upcomingPieces[2] = ShapeInitializer.getRandomPiece();
         }
 
         ghostPiece.changeY(10);
@@ -83,11 +83,11 @@ public class Board {
 
         upcomingPieces[0] = ShapeInitializer.parsePiece(upcomingPieces[1].getClass().getSimpleName());
         upcomingPieces[1] = ShapeInitializer.parsePiece(upcomingPieces[2].getClass().getSimpleName());
-        upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+        upcomingPieces[2] = ShapeInitializer.getRandomPiece();
 
         // prevents the upcoming from having 3 of the same piece type
         while (upcomingPieces[2].getClass().getSimpleName().equals(upcomingPieces[1].getClass().getSimpleName()) && upcomingPieces[1].getClass().getSimpleName().equals(upcomingPieces[0].getClass().getSimpleName())) {
-            upcomingPieces[2] = ShapeInitializer.getRandomPiece(5);
+            upcomingPieces[2] = ShapeInitializer.getRandomPiece();
         }
     }
 

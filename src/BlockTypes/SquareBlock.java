@@ -3,8 +3,8 @@ import Models.Piece;
 import Models.shapeType;
 
 public class SquareBlock extends Piece {
-    public SquareBlock(int x) {
-        super(shapeType.SQUARE, x, -2);
+    public SquareBlock() {
+        super(shapeType.SQUARE, -2);
     }
 
     // Squares don't rotate!

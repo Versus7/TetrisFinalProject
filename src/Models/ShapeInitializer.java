@@ -4,8 +4,8 @@ import BlockTypes.*;
 import java.awt.Color;
 
 public class ShapeInitializer {
-    public static void makeShape(shapeType t, int x, int y, ArrayList<Block> shape) {
-        Coordinate c = new Coordinate(x, y);
+    public static void makeShape(shapeType t, int y, ArrayList<Block> shape) {
+        Coordinate c = new Coordinate(5, y);
         shape.add(new Block(c.getX(), c.getY()));
         switch (t) {
             case LINE:
@@ -70,24 +70,24 @@ public class ShapeInitializer {
         }
     }
 
-    public static Piece getRandomPiece(int x) {
+    public static Piece getRandomPiece() {
         int index = (int)(Math.random()*7)+1;
 
         switch(index) {
             case 1:
-                return new IBlock(x);
+                return new IBlock();
             case 2:
-                return new SquareBlock(x);
+                return new SquareBlock();
             case 3:
-                return new TBlock(x);
+                return new TBlock();
             case 4:
-                return new RSnakeBlock(x);
+                return new RSnakeBlock();
             case 5:
-                return new LSnakeBlock(x);
+                return new LSnakeBlock();
             case 6:
-                return new LeftL(x);
+                return new LeftL();
             case 7:
-                return new RightL(x);
+                return new RightL();
             default:
                 return null;
         }
@@ -96,19 +96,19 @@ public class ShapeInitializer {
     public static Piece parsePiece(String s) {
         switch (s) {
             case "IBlock":
-                return new IBlock(5);
+                return new IBlock();
             case "LeftL":
-                return new LeftL(5);
+                return new LeftL();
             case "LSnakeBlock":
-                return new LSnakeBlock(5);
+                return new LSnakeBlock();
             case "RightL":
-                return new RightL(5);
+                return new RightL();
             case "RSnakeBlock":
-                return new RSnakeBlock(5);
+                return new RSnakeBlock();
             case "SquareBlock":
-                return new SquareBlock(5);
+                return new SquareBlock();
             case "TBlock":
-                return new TBlock(5);
+                return new TBlock();
             default:
                 return null;
         }
