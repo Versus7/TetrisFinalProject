@@ -41,6 +41,6 @@ public class Block {
     }
 
     public String toString() {
-        return getCoords().toString();
+        return coordinate.toString();
     }
 }

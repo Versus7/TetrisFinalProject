@@ -24,7 +24,7 @@ public class Stats {
             return;
         }
 
-        this.linesCleared += lines;
+        linesCleared += lines;
         if (linesCleared >= level * 5) {
             incrementLevel(1);
             linesCleared = 0;
@@ -49,15 +49,15 @@ public class Stats {
                 break;
         }
 
-        this.score += (constant * lines);
+        score += (constant * lines);
     }
 
     public void hardDrop(int distance) {
-        this.score += (distance * 2 * level);
+        score += (distance * 2 * level);
     }
 
     public void softDrop(int distance) {
-        this.score += distance * level;
+        score += distance * level;
     }
 
     private void incrementLevel(int amount) {

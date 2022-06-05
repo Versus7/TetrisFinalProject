@@ -46,7 +46,7 @@ public abstract class Piece {
     public int getLeftmostCoordinate() {
         int left = Integer.MAX_VALUE;
 
-        for (Block b: getShape()) {
+        for (Block b: shape) {
             if (b.getCoords().getX() < left) {
                 left = b.getCoords().getX();
             }
@@ -58,7 +58,7 @@ public abstract class Piece {
     private int getRightmostCoordinate() {
         int right = Integer.MIN_VALUE;
 
-        for (Block b: getShape()) {
+        for (Block b: shape) {
             if (b.getCoords().getX() > right) {
                 right = b.getCoords().getX();
             }
@@ -71,7 +71,7 @@ public abstract class Piece {
         double avgX = 0;
         double avgY = 0;
 
-        for (Block b: getShape()) {
+        for (Block b: shape) {
             avgX += b.getCoords().getX();
             avgY += b.getCoords().getY();
         }
@@ -116,17 +116,17 @@ public abstract class Piece {
         double degrees = Math.toRadians(d);
 
         for (int i = 0; i < 4; i++) {
-            double originalX = getShape().get(i).getCoords().getX();
-            double originalY = getShape().get(i).getCoords().getY();
+            double originalX = shape.get(i).getCoords().getX();
+            double originalY = shape.get(i).getCoords().getY();
 
             double calculatedX = originalX * Math.cos(degrees) - originalY * Math.sin(degrees);
             double calculatedY = originalX * Math.sin(degrees) + originalY * Math.cos(degrees);
 
-            getShape().get(i).getCoords().setX(
+            shape.get(i).getCoords().setX(
                 (int)(Math.round(calculatedX))
             );
 
-            getShape().get(i).getCoords().setY(
+            shape.get(i).getCoords().setY(
                 (int)(Math.round(calculatedY))
             );
         }

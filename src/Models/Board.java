@@ -222,8 +222,8 @@ public class Board {
 
      // Updates ghost piece with all properties of current piece
     public void redrawGhost() {
-        if (!getGhostPiece().getClass().getSimpleName().equals(getCurrentPiece().getClass().getSimpleName())) {
-            ghostPiece = ShapeInitializer.parsePiece(getCurrentPiece().getClass().getSimpleName());
+        if (!ghostPiece.getClass().getSimpleName().equals(currentPiece.getClass().getSimpleName())) {
+            ghostPiece = ShapeInitializer.parsePiece(currentPiece.getClass().getSimpleName());
         } else {
             ghostPiece.changeY(-20);
         }
@@ -235,8 +235,8 @@ public class Board {
             ghostPiece.rotateLeft();
         }
         
-        ghostPiece.changeX(getCurrentPiece().getLeftmostCoordinate() - ghostPiece.getLeftmostCoordinate());
-        ghostPiece.changeY(getCurrentPiece().getCenterPoint().getY()-ghostPiece.getCenterPoint().getY());
+        ghostPiece.changeX(currentPiece.getLeftmostCoordinate() - ghostPiece.getLeftmostCoordinate());
+        ghostPiece.changeY(currentPiece.getCenterPoint().getY()-ghostPiece.getCenterPoint().getY());
         dropPieceCompletely(ghostPiece, false);
     }
 
