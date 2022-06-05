@@ -1,5 +1,7 @@
 package Models;
 
+// Rank is a helper class for Leaderboard, to keep track of the name and score of a player
+
 public class Rank {
    private String name;
    private int score;

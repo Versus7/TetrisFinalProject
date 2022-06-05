@@ -6,9 +6,15 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Credit for code that writes to file: https://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
+ */
+
 public class Leaderboard {
     private Rank[] ranks = new Rank[5];
 
+    // Constructor creates a leaderboard file if one does not exist
+    // If one does exist, then it copies the contents to the ranks array
     public Leaderboard() {
         try {
             String path = System.getProperty("user.dir");
@@ -37,6 +43,7 @@ public class Leaderboard {
         }
     }
 
+    // Checks if a score is high enough to be on the leaderboard
     public boolean checkScore(int score) {
         for (int i = 0; i < ranks.length; i++) {
             if (ranks[i] == null || score > ranks[i].getScore()) {
@@ -46,6 +53,7 @@ public class Leaderboard {
         return false;
     }
 
+    // Adds the score to the leaderboard
     public void addScore(String name, int score) {
         for (int i = 0; i < ranks.length; i++) {
             if (ranks[i] == null) {
@@ -76,16 +84,16 @@ public class Leaderboard {
                 return;
             }
 
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
+            FileWriter writer = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
             for (int i = 0; i < ranks.length; i++) {
                 if (ranks[i] == null) {
                     break;
                 }
-                bw.write(ranks[i].getName() + "," + ranks[i].getScore());
-                bw.newLine();
+                bufferedWriter.write(ranks[i].getName() + "," + ranks[i].getScore());
+                bufferedWriter.newLine();
             }
-            bw.close();
+            bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -99,8 +107,6 @@ public class Leaderboard {
                 break;
             }
             rankings += (i+1) + "). " + ranks[i].getName() + " " + String.format("%,d", ranks[i].getScore()) + "\n";
-
-
         }
         return rankings;
     }

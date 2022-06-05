@@ -36,17 +36,18 @@ public class TetrisWindowPanel extends JPanel {
 
         // border
         g2.drawRect(0, 0, (int)(SQUAREWIDTH*10.0), (int)(SQUAREWIDTH*20.0));
-                // grid
-                g2.setColor(Color.white);
-                g2.setStroke(new BasicStroke(0.5f));
-                for (int i = 0; i < 10; i++) {		        
-                    for (int j = 0; j < 20; j++) {		       
-                        g.drawRect((int)(i*SQUAREWIDTH), (int)(j*SQUAREWIDTH), SQUAREWIDTH.intValue(), SQUAREWIDTH.intValue()); 
-                    }
-                }	
 
-                g2.setStroke(new BasicStroke(4));
-                g2.setColor(board.getCurrentPiece().getColor());
+        // grid
+        g2.setColor(Color.white);
+        g2.setStroke(new BasicStroke(0.5f));
+        for (int i = 0; i < 10; i++) {		        
+            for (int j = 0; j < 20; j++) {		       
+                g.drawRect((int)(i*SQUAREWIDTH), (int)(j*SQUAREWIDTH), SQUAREWIDTH.intValue(), SQUAREWIDTH.intValue()); 
+            }
+        }	
+
+        g2.setStroke(new BasicStroke(4));
+        g2.setColor(board.getCurrentPiece().getColor());
         
         // pieces
         board.getCurrentPiece().draw(g2);
@@ -89,7 +90,7 @@ public class TetrisWindowPanel extends JPanel {
         // The following 2 lines of code were modified from the Oracle documentation for the JOptionPane class
         // https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html#create
         Object[] options = {"Play Again", "Quit Game"};
-        int n = JOptionPane.showOptionDialog(this,"Play Again?","Another round", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        int n = JOptionPane.showOptionDialog(this,"Play Again?","Another Round", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
         if (n == 0) {
             board = new Board();

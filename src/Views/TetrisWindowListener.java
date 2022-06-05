@@ -7,6 +7,10 @@ import java.io.File;
 import javax.sound.sampled.*;
 import java.io.IOException;
 
+/**
+ * Credit for playing the music: https://www.delftstack.com/howto/java/play-sound-in-java/
+ */
+
 public class TetrisWindowListener implements KeyListener, ActionListener, FocusListener {
     private TetrisWindowPanel panel;
     private ScorePanel score;

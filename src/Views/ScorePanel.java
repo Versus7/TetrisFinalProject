@@ -6,6 +6,10 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+/**
+ * Credit for centering text in a JTextPane: https://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
+ */
+
 public class ScorePanel extends JPanel {
     private JTextPane scoreLabel;
     private JTextPane levelLabel;

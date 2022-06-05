@@ -45,7 +45,7 @@ public class Stats {
                 constant = 800;
                 break;
             default:
-                constant = 410;
+                constant = 0;
                 break;
         }
 

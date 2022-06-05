@@ -50,7 +50,6 @@ public class InfoPanel extends JPanel {
         }
 
         // The following code deals with the "Upcoming" blocks.
-        // Colors the boxes as the same color as the current piece
         Piece second = game.getBoard().getUpcomingPieces()[0];
 
         g.setColor(second.getColor());

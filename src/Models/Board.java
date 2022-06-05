@@ -184,7 +184,7 @@ public class Board {
 
     /**
      * Method checks if the piece can move down
-     * @param a piece to move down, if possible
+     * @param a piece to move down
      * @return true if the piece can move down, false otherwise
      */
     public boolean movePieceDown(Piece a) {
@@ -201,7 +201,7 @@ public class Board {
         return false;
     }
 
-    // Repeats the movePieceDown method until the piece is as far as it goes
+    // Repeats the movePieceDown method until the piece cannot move down any further
     public void dropPieceCompletely(Piece a, boolean forCurrentPiece) {
         int distance = 0;
         while (true) {
@@ -220,6 +220,7 @@ public class Board {
         }
      }
 
+     // Updates ghost piece with all properties of current piece
     public void redrawGhost() {
         if (!getGhostPiece().getClass().getSimpleName().equals(getCurrentPiece().getClass().getSimpleName())) {
             ghostPiece = ShapeInitializer.parsePiece(getCurrentPiece().getClass().getSimpleName());
@@ -280,7 +281,6 @@ public class Board {
         temp.rotateRight();
         if (isValidPiece(temp)) {
             currentPiece.rotateRight();
-            // ghostPiece.rotateRight();
         }
     }
 
@@ -290,7 +290,6 @@ public class Board {
         temp.rotateLeft();
         if (isValidPiece(temp)) {
             currentPiece.rotateLeft();
-            // ghostPiece.rotateLeft();
         }   
     }
 }

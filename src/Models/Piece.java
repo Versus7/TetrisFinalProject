@@ -117,7 +117,7 @@ public abstract class Piece {
     }
 
     // Methods for Rotation
-    public void rotate(double d) {
+    private void rotate(double d) {
         Coordinate center = getCenterPoint();
         double centerX = center.getX();
         double centerY = center.getY();
