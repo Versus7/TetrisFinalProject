@@ -53,7 +53,11 @@ public class Stats {
     }
 
     public void hardDrop(int distance) {
-        this.score += (distance * 2);
+        this.score += (distance * 2 * level);
+    }
+
+    public void softDrop(int distance) {
+        this.score += distance * level;
     }
 
     private void incrementLevel(int amount) {

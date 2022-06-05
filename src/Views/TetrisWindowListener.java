@@ -54,6 +54,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
                 break;
             case 40:
                 panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
+                panel.getBoard().getStats().softDrop(1);
                 break;
             case 32:
                 panel.getBoard().dropPieceCompletely(panel.getBoard().getCurrentPiece(), true);
