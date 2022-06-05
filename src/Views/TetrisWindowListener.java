@@ -45,14 +45,6 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // System.out.println(e.getKeyCode());
-        /**
-         * control - rotate piece left
-         * up arrow - rotate right
-         * c is hold
-         * spacebar insta drop
-         * eventually switch system to use arrow keys instead of WASD
-         */
         switch (e.getKeyCode()) {
             case 37:
                 panel.getBoard().movePieceLeft();
@@ -64,7 +56,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
                 panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
                 break;
             case 32:
-                panel.getBoard().dropPieceCompletely(panel.getBoard().getCurrentPiece());
+                panel.getBoard().dropPieceCompletely(panel.getBoard().getCurrentPiece(), true);
                 panel.getBoard().generateNewPiece();
                 break;
             case 67: // hold pieces

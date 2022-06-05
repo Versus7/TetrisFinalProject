@@ -10,10 +10,8 @@ public class InfoPanel extends JPanel {
     
     public InfoPanel(TetrisWindowPanel game) {
         this.game = game;
-        // System.out.println("Window width: " + windowWidth);
 
         setPreferredSize(new Dimension((int)(150), getHeight()));
-
         setBackground(Color.black);
     }
 
@@ -26,9 +24,7 @@ public class InfoPanel extends JPanel {
         heldPiece = game.getBoard().getHeldPiece();
 
         Double x = (getHeight()) / 23.0;
-        // System.out.println("X: " + x);
         int startX = (int)(getWidth()*0.1);
-        // System.out.println("Start x: " + startX);
         int squareSideLength = (int)(4*x);
         
         setPreferredSize(new Dimension(squareSideLength+50, getHeight()));
@@ -96,8 +92,5 @@ public class InfoPanel extends JPanel {
             fourth.changeY(1);
         }
         fourth.draw(g);
-
-        // System.out.println();
-        // System.out.println();
     }
 }
