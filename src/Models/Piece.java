@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public abstract class Piece {
     private ArrayList<Block> shape = new ArrayList<Block>();
     private Color color;
-    private int rotatedAngle = 0;
 
     public Piece(shapeType t, int x, int y) {
         ShapeInitializer.makeShape(t, x, y, shape);
@@ -24,10 +23,6 @@ public abstract class Piece {
 
     public Color getColor() {
         return color;
-    }
-
-    public int getRotatedAngle() {
-        return rotatedAngle;
     }
 
     public ArrayList<Coordinate> getLowestPoints() {
@@ -142,7 +137,6 @@ public abstract class Piece {
 
         changeX((int)Math.floor(centerX - getCenterPoint().getX()));
         changeY((int)Math.ceil(centerY - getCenterPoint().getY()));
-        rotatedAngle += d;
     }
 
     public void rotateRight() {

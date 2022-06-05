@@ -67,6 +67,7 @@ public class Board {
 
         shiftPieces();
         clearRow(checkRowFull());
+        redrawGhost();
         
         didHold = false;
     }
@@ -220,12 +221,6 @@ public class Board {
             ghostPiece.changeY(-20);
         }
         
-        if (getCurrentPiece().getRotatedAngle() > ghostPiece.getRotatedAngle()) {
-            ghostPiece.rotateRight();
-        } else if (getCurrentPiece().getRotatedAngle() < ghostPiece.getRotatedAngle()) {
-            ghostPiece.rotateLeft();
-        }
-
         ghostPiece.changeX(getCurrentPiece().getLeftmostCoordinate() - ghostPiece.getLeftmostCoordinate());
         ghostPiece.changeY(getCurrentPiece().getCenterPoint().getY()-ghostPiece.getCenterPoint().getY());
         dropPieceCompletely(ghostPiece);
@@ -272,6 +267,7 @@ public class Board {
         temp.rotateRight();
         if (isValidPiece(temp)) {
             currentPiece.rotateRight();
+            ghostPiece.rotateRight();
         } else {
             System.out.println("Invalid rotation");
         }
@@ -283,6 +279,7 @@ public class Board {
         temp.rotateLeft();
         if (isValidPiece(temp)) {
             currentPiece.rotateLeft();
+            ghostPiece.rotateLeft();
         } else {
             System.out.println("Invalid rotation");
         }
