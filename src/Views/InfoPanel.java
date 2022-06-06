@@ -48,6 +48,20 @@ public class InfoPanel extends JPanel {
             }
             heldPiece.draw(g);
         }
+        // Show the score
+        double fontSize = x*0.75;
+        if ((game.getBoard().getStats().getScore() + "").length() > 2) {
+            fontSize *= ((game.getBoard().getStats().getScore()  + "").length() * -0.1 + 1.2);
+        }
+        Font font = new Font(Font.MONOSPACED, Font.BOLD, (int)(fontSize));
+
+        g2.setColor(Color.white);
+        // g2.setFont(new Font("Arial", Font.PLAIN, (int)(x*0.75)));
+        g2.setFont(font);
+        g2.drawString("Score: " + game.getBoard().getStats().getScore(), startX, (int)(x*6.0));
+        g2.drawString("Level: " + game.getBoard().getStats().getLevel(), startX, (int)(x*7.0));
+        // g2.drawString("Lines: " + game.getBoard().getStats().getLines(), startX, (int)(x*4.5));
+
 
         // The following code deals with the "Upcoming" blocks.
         Piece second = game.getBoard().getUpcomingPieces()[0];
