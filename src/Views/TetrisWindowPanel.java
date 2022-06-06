@@ -15,12 +15,22 @@ public class TetrisWindowPanel extends JPanel {
     private Board board = new Board();
     public static Double SQUAREWIDTH = 10.0;
     private Leaderboard leaderboard = new Leaderboard();
+    private boolean gamePaused = false;
 
     public TetrisWindowPanel() {
         JPanel everything = new JPanel();
         everything.setLayout(new GridLayout(20, 10));
 
         add(everything);
+    }
+
+    public void setPause(boolean pause) {
+        gamePaused = pause;
+        repaint();
+    }
+
+    public boolean getPausedStatus() {
+        return gamePaused;
     }
 
     public void paintComponent(Graphics g) {
@@ -65,7 +75,21 @@ public class TetrisWindowPanel extends JPanel {
         board.redrawGhost();
         board.getGhostPiece().draw(g2);
 
-        
+        if (gamePaused) {
+            g2.setColor(Color.black);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+            g2.fillRect(0, 0, getWidth(), getHeight());
+
+            g2.setColor(Color.white);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+            g2.setFont(new Font("Arial", Font.BOLD, (int)(SQUAREWIDTH*2.0)));
+            g2.drawString("PAUSED", SQUAREWIDTH.intValue(), getHeight()/2);
+
+            // Draw the score and the level count below
+            g2.setFont(new Font("Arial", Font.BOLD, (int)(SQUAREWIDTH*1.0)));
+            g2.drawString("Score: " + board.getStats().getScore(), SQUAREWIDTH.intValue(), getHeight() - (int)(SQUAREWIDTH*1.0));
+            g2.drawString("Level: " + board.getStats().getLevel(), SQUAREWIDTH.intValue(), getHeight() - (int)(SQUAREWIDTH*2.0));
+        }
 
     }
 

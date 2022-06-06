@@ -17,7 +17,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
     private InfoPanel info;
     private Timer timer;
     private Clip clip;
-    private boolean inFocus = true;
+    private boolean paused = false;
     
     private double speed = 1000;
 
@@ -49,6 +49,25 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 27) {
+            paused = !paused;
+            panel.setPause(paused);
+            if (!paused) {
+                if (clip != null) {
+                    clip.start();
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+            } else {
+                if (clip != null) {
+                    clip.stop();
+                }
+            }
+        }
+
+        if (paused) {
+            return;
+        }
+
         switch (e.getKeyCode()) {
             case 37:
                 panel.getBoard().movePieceLeft();
@@ -66,6 +85,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
                 break;
             case 67: // hold pieces
                 panel.getBoard().holdPiece();
+                break;
             default:
                 break;
         }
@@ -77,17 +97,19 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case 38:
-                panel.getBoard().rotatePieceRight();
-                break;
-            case 81:
-                panel.getBoard().rotatePieceLeft();
-                break;
-            default:
-                break;
+        if (!paused) {
+            switch (e.getKeyCode()) {
+                case 38:
+                    panel.getBoard().rotatePieceRight();
+                    break;
+                case 90:
+                    panel.getBoard().rotatePieceLeft();
+                    break;
+                default:
+                    break;
+            }
+            panel.repaint();
         }
-        panel.repaint();
     }
 
     @Override
@@ -95,7 +117,7 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (inFocus) {
+        if (!paused) {
             panel.getBoard().movePieceDown(panel.getBoard().getCurrentPiece());
             updateEverything();
         }
@@ -103,7 +125,11 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
     @Override
     public void focusGained(FocusEvent e) {
-        inFocus = true;
+        if (!paused) {
+            return;
+        }
+        paused = false;
+        panel.setPause(paused);
 
         if (clip != null) {
             clip.start();
@@ -113,7 +139,8 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
 
     @Override
     public void focusLost(FocusEvent e) {
-        inFocus = false;
+        paused = true;
+        panel.setPause(paused);
 
         if (clip != null) {
             clip.stop();
