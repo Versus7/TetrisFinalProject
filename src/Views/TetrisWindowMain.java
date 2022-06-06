@@ -11,12 +11,10 @@ public class TetrisWindowMain {
         everything.setLayout(new BorderLayout());
 
         TetrisWindowPanel game = new TetrisWindowPanel();
-        ScorePanel score = new ScorePanel(game);
         InfoPanel infoPanel = new InfoPanel(game);
-        new TetrisWindowListener(game, score, infoPanel);
+        new TetrisWindowListener(game, infoPanel);
         
         everything.add(game, BorderLayout.CENTER);
-        everything.add(score, BorderLayout.SOUTH);
         everything.add(infoPanel, BorderLayout.EAST);
 
         // JFrame configuration

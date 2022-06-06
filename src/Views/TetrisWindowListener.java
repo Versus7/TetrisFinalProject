@@ -13,16 +13,14 @@ import java.io.IOException;
 
 public class TetrisWindowListener implements KeyListener, ActionListener, FocusListener {
     private TetrisWindowPanel panel;
-    private ScorePanel score;
     private InfoPanel info;
     private Timer timer;
     private Clip clip;
     
     private double speed = 1000;
 
-    public TetrisWindowListener(TetrisWindowPanel panel, ScorePanel score, InfoPanel info) {
+    public TetrisWindowListener(TetrisWindowPanel panel, InfoPanel info) {
         this.panel = panel;
-        this.score = score;
         this.info = info;
 
         panel.addKeyListener(this);
@@ -157,7 +155,6 @@ public class TetrisWindowListener implements KeyListener, ActionListener, FocusL
         }
 
         panel.repaint();
-        score.repaint();
         info.repaint();
     }
 
