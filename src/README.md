@@ -20,4 +20,7 @@ board
 * Spacebar: Drop the piece completely
 * C: Hold the piece
 * Z: Rotate the piece counterclockwise
+* Esc: Pauses the game.
+    * Note: When window loses focus, game will pause automatically until focus is regained. 
 
+> Let the games begin.
