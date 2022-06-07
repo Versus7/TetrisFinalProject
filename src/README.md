@@ -19,6 +19,7 @@ board
 * ⬆️: Rotate the piece clockwise
 * Spacebar: Drop the piece completely
 * C: Hold the piece
+    * Note: you can only hold once per piece, so make sure you use it wisely!
 * Z: Rotate the piece counterclockwise
 * Esc: Pauses the game.
     * Note: When window loses focus, game will pause automatically until focus is regained. 
@@ -26,11 +27,8 @@ board
 ## Running The Game
 The main file is called ```TetrisWindowMain.java```. 
 
-There are a few ways to proceed:
+If a ```\bin``` directory exists, then, in the root directory (the current path should end in ```\TetrisFinalProject```), run the following command:
 
-1) If a ```\bin``` directory exists, then, in the root directory (the current path should end in ```\TetrisFinalProject```), run the following command:
 ```java -cp bin Views.TetrisWindowMain```
-
-2) Alternatively, the program should be able to run by compiling the file ```TetrisWindowMain.java```, which is located in the ```\Views``` directory.
 
 > Let the games begin.

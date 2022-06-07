@@ -1,5 +1,6 @@
 package Models;
 
+// This class keeps track of all game stats, and handles increasing the score and level.
 public class Stats {
    private int score;
    private int level;

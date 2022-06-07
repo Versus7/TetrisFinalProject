@@ -120,7 +120,7 @@ public class Board {
     }
 
     /**
-     * Clears rows that are full, and moves blocks above downwards
+     * Clears rows that are full, and moves blocks above those rows downwards
      * @param rowsToClear the indices of the rows that are full
      */
     private void clearRow(ArrayList<Integer> rowsToClear) {

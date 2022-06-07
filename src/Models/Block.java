@@ -3,6 +3,8 @@ import java.awt.*;
 
 import Views.TetrisWindowPanel;
 
+// This class is the unit by which pieces are made of.
+
 public class Block {
     private Coordinate coordinate;
     private Color c;
