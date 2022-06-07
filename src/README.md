@@ -24,5 +24,13 @@ board
     * Note: When window loses focus, game will pause automatically until focus is regained. 
 
 ## Running The Game
-The main file is called ```TetrisWindowMain.java```. To begin, compile the file, which is located in the ```\src\Views``` directory.
+The main file is called ```TetrisWindowMain.java```. 
+
+There are a few ways to proceed:
+
+1) If a ```\bin``` directory exists, then, in the root directory (the current path should end in ```\TetrisFinalProject```), run the following command:
+```java -cp bin Views.TetrisWindowMain```
+
+2) Alternatively, the program should be able to run by compiling the file ```TetrisWindowMain.java```, which is located in the ```\Views``` directory.
+
 > Let the games begin.
