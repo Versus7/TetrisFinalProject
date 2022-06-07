@@ -23,4 +23,6 @@ board
 * Esc: Pauses the game.
     * Note: When window loses focus, game will pause automatically until focus is regained. 
 
+## Running The Game
+The main file is called ```TetrisWindowMain.java```. To begin, compile the file, which is located in the ```\src\Views``` directory.
 > Let the games begin.
