@@ -8,7 +8,7 @@ import Models.Leaderboard;
 import Models.Block;
 
 /**
- * Credit for Ghost Piece's opacity: https://stackoverflow.com/questions/11552092/changing-image-opacity
+ * Credit for custom opacity: https://stackoverflow.com/questions/11552092/changing-image-opacity
  */
 
 public class TetrisWindowPanel extends JPanel {
@@ -59,7 +59,7 @@ public class TetrisWindowPanel extends JPanel {
         g2.setStroke(new BasicStroke(4));
         g2.setColor(board.getCurrentPiece().getColor());
         
-        // pieces
+        // Current Piece
         board.getCurrentPiece().draw(g2);
 
         // Drawing the whole board
@@ -67,14 +67,11 @@ public class TetrisWindowPanel extends JPanel {
             b.draw(g2);
         }
 
-        // Dealing with the ghost piece at the bottom
-        // See credit given above for the following 2 lines of code
-        float opacity = 0.5f;
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
-
-        board.redrawGhost();
+        // Ghost Piece
+        board.updateGhost();
         board.getGhostPiece().draw(g2);
 
+        // Game pause screen
         if (gamePaused) {
             g2.setColor(Color.black);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));

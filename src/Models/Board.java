@@ -23,6 +23,7 @@ public class Board {
         }
 
         ghostPiece.changeY(10);
+        ghostPiece.setCustomOpacity(0.5f);
     }
 
     // Getters
@@ -67,7 +68,7 @@ public class Board {
 
         shiftPieces();
         clearRow(checkRowFull());
-        redrawGhost();
+        updateGhost();
         
         didHold = false;
     }
@@ -221,9 +222,10 @@ public class Board {
      }
 
      // Updates ghost piece with all properties of current piece
-    public void redrawGhost() {
+    public void updateGhost() {
         if (!ghostPiece.getClass().getSimpleName().equals(currentPiece.getClass().getSimpleName())) {
             ghostPiece = ShapeInitializer.parsePiece(currentPiece.getClass().getSimpleName());
+            ghostPiece.setCustomOpacity(0.6f);
         } else {
             ghostPiece.changeY(-20);
         }

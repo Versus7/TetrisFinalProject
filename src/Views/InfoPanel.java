@@ -35,17 +35,24 @@ public class InfoPanel extends JPanel {
         g2.drawRoundRect(startX, x.intValue(), squareSideLength, squareSideLength, 10, 10);
 
         if (heldPiece != null) {
-            while (heldPiece.getCenterPoint().getX() > 1) {
+            heldPiece.setCustomSize(TetrisWindowPanel.SQUAREWIDTH*0.9);
+
+            while (heldPiece.getLeftmostCoordinate() > 1) {
                 heldPiece.changeX(-1);
             }
-
-            while (heldPiece.getCenterPoint().getY() > 2) {
-                heldPiece.changeY(-1);
-            }
-
-            while (heldPiece.getCenterPoint().getY() < 2) {
+            while (heldPiece.getLowestPoint() < 3) {
                 heldPiece.changeY(1);
             }
+            while (heldPiece.getLowestPoint() > 3) {
+                heldPiece.changeY(-1);
+            }
+                   
+            if (heldPiece.getClass().getSimpleName().equals("IBlock")) {
+                while (heldPiece.getLowestPoint() < 4) {
+                    heldPiece.changeY(1);
+                }
+            }
+ 
             heldPiece.draw(g);
         }
         // Show the score
@@ -56,12 +63,9 @@ public class InfoPanel extends JPanel {
         Font font = new Font(Font.MONOSPACED, Font.BOLD, (int)(fontSize));
 
         g2.setColor(Color.white);
-        // g2.setFont(new Font("Arial", Font.PLAIN, (int)(x*0.75)));
         g2.setFont(font);
         g2.drawString("Score: " + game.getBoard().getStats().getScore(), startX, (int)(x*6.0));
         g2.drawString("Level: " + game.getBoard().getStats().getLevel(), startX, (int)(x*7.0));
-        // g2.drawString("Lines: " + game.getBoard().getStats().getLines(), startX, (int)(x*4.5));
-
 
         // The following code deals with the "Upcoming" blocks.
         Piece second = game.getBoard().getUpcomingPieces()[0];
@@ -69,12 +73,19 @@ public class InfoPanel extends JPanel {
         g.setColor(second.getColor());
         g.drawRoundRect(startX, (int)(8*x), squareSideLength, squareSideLength, 10, 10);
 
-        while (second.getCenterPoint().getX() > 1) {
+        second.setCustomSize(TetrisWindowPanel.SQUAREWIDTH*0.9);
+        while (second.getLeftmostCoordinate() > 1) {
             second.changeX(-1);
         }
-        while (second.getCenterPoint().getY() < 8) {
+        while (second.getLowestPoint() < 9) {
             second.changeY(1);
         }
+        if (second.getClass().getSimpleName().equals("IBlock")) {
+            while (second.getLowestPoint() < 10) {
+                second.changeY(1);
+            }
+        }
+
         second.draw(g);
 
 
@@ -83,13 +94,21 @@ public class InfoPanel extends JPanel {
 
         g.setColor(third.getColor());
         g.drawRoundRect(startX, (int)(13*x), squareSideLength, squareSideLength, 10, 10);
+        third.setCustomSize(TetrisWindowPanel.SQUAREWIDTH*0.9);
 
-        while (third.getCenterPoint().getX() > 1) {
+        while (third.getLeftmostCoordinate() > 1) {
             third.changeX(-1);
         }
-        while (third.getCenterPoint().getY() < 12) {
+        while (third.getLowestPoint() < 14) {
             third.changeY(1);
         }
+
+        if (third.getClass().getSimpleName().equals("IBlock")) {
+            while (third.getLowestPoint() < 15) {
+                third.changeY(1);
+            }
+        }
+
         third.draw(g);
 
         // Fourth piece in the row
@@ -98,11 +117,18 @@ public class InfoPanel extends JPanel {
         g.setColor(fourth.getColor());
         g.drawRoundRect(startX, (int)(18*x), squareSideLength, squareSideLength, 10, 10);
 
-        while (fourth.getCenterPoint().getX() > 1) {
+        fourth.setCustomSize(TetrisWindowPanel.SQUAREWIDTH*0.9);
+        while (fourth.getLeftmostCoordinate() > 1) {
             fourth.changeX(-1);
         }
-        while (fourth.getCenterPoint().getY() < 17) {
+        while (fourth.getLowestPoint() < 19) {
             fourth.changeY(1);
+        }
+
+        if (fourth.getClass().getSimpleName().equals("IBlock")) {
+            while (fourth.getLowestPoint() < 20) {
+                fourth.changeY(1);
+            }
         }
         fourth.draw(g);
     }

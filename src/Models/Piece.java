@@ -7,6 +7,8 @@ public abstract class Piece {
     private ArrayList<Block> shape = new ArrayList<Block>();
     private Color color;
     private int rotatedAngle = 0;
+    private double customSize;
+    private float customOpacity;
 
     public Piece(shapeType t, int y) {
         ShapeInitializer.makeShape(t, y, shape);
@@ -30,7 +32,7 @@ public abstract class Piece {
         return rotatedAngle;
     }
 
-    private int getLowestPoint() {
+    public int getLowestPoint() {
         int lowest = Integer.MIN_VALUE;
 
         // find the lowest value
@@ -55,7 +57,7 @@ public abstract class Piece {
         return left;
     }
 
-    private int getRightmostCoordinate() {
+    public int getRightmostCoordinate() {
         int right = Integer.MIN_VALUE;
 
         for (Block b: shape) {
@@ -83,6 +85,22 @@ public abstract class Piece {
         shape.clear();
         for (Block b: s) {
             shape.add(new Block(b.getCoords().getX(), b.getCoords().getY()));
+        }
+    }
+
+    public void setCustomSize(double s) {
+        customSize = s;
+
+        for (int i = 0; i < shape.size(); i++) {
+            shape.get(i).setCustomSize(customSize);
+        }
+    }
+
+    public void setCustomOpacity(float f) {
+        customOpacity = f;
+
+        for (int i = 0; i < shape.size(); i++) {
+            shape.get(i).setCustomOpacity(customOpacity);
         }
     }
 

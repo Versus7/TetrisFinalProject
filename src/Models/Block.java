@@ -7,6 +7,7 @@ public class Block {
     private Coordinate coordinate;
     private Color c;
     private double customSize = 0;
+    private float customOpacity = 1;
 
     public Block(int x, int y) {
         coordinate = new Coordinate(x, y);
@@ -32,6 +33,10 @@ public class Block {
         customSize = d;
     }
 
+    public void setCustomOpacity(float d) {
+        customOpacity = d;
+    }
+
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D)g;
         double squareSize;
@@ -43,17 +48,12 @@ public class Block {
         double xCoord = (double)(coordinate.getX() * squareSize);
         double yCoord = (double)(coordinate.getY() * squareSize);
 
-        // g.setColor(Color.black);
-        // g.fillRect((int)(xCoord), (int)(yCoord), (int)(squareSize), (int)(squareSize));
-
-        // g.setColor(c);
-        // g.fillRect((int)(xCoord), (int)(yCoord), (int)(squareSize*0.95), (int)(squareSize*0.95));
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f*customOpacity));
         g2.setColor(c);
         g2.fillRect((int)(xCoord), (int)(yCoord), (int)squareSize, (int)squareSize);
 
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-        g.fillRect((int)(xCoord), (int)(yCoord), (int)(squareSize*0.9), (int)(squareSize*0.9));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f*customOpacity));
+        g.fillRect((int)(xCoord), (int)(yCoord), (int)(squareSize*0.85), (int)(squareSize*0.85));
 
     }
 
